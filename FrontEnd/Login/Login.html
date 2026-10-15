@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login.</title>
+		<link rel="stylesheet" href="/Login/Login.css">
+	</head>
+	<body>
+	<main class="ticket">
+		<h1>Bienvenido</h1>
+		<p class="subtitulo">Ingresa tus datos para abrir el punto de venta.</p>
+		<form class="Login" id="loginForm" action="/login" method="POST">
+			<div>
+				<label for = "user">Nombre de Usuario</label>
+				<input type="text" id="user" name="nombre" required>
+			</div>
+			<div>
+				<label for = "pass">Contraseña</label>
+				<input type="password" id="pass" name="password" required>
+			</div>
+			<div id="btn-mostrar">
+				<button type="button" name="boton">Mostrar</button>
+			</div>
+			<div>
+				<input type="submit" value="Entrar">
+			</div>
+        </form>
+        </main>
+        <script>
+			document.querySelector('#btn-mostrar button').onclick = e => {
+				const show = pass.type === 'password';
+				pass.type = show ? 'text' : 'password';
+				e.currentTarget.textContent = show ? 'Ocultar' : 'Mostrar'; };
+		</script>
+	</body>
+</html>

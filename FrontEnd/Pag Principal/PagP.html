@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="PagPStyles/PagP.css">
+</head>
+<body>
+
+    <main class="contenedor-principal">
+        <!-- Encabezado y Navegación -->
+        <nav class="barra-navegacion">
+            <h1>Pagina Principal</h1>
+
+            <!-- Envoltorio para que el menú flotante se posicione relativo a este botón -->
+            <table class="TablaNav">
+                <tr>
+                    <td>
+                        <div class="contenedor-menu-perfil">
+                            <button type="button" id="btn-menu" class="btn-menu">&#8942;</button>
+                            <div id="contenedor-perfil"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" class="btn-ovalado">Cartera de Clientes</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn-ovalado">Inventario</button>                        
+                    </td>
+                    <td>
+                        <button type="button" class="btn-ovalado">Proveedores</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn-ovalado">Soporte</button>
+                    </td>
+                    <td>
+                        <button type="button" id="btn-agregar" class="btn-agregar">+</button>
+                    </td>
+                </tr>
+            </table>
+
+            
+        </nav>
+
+        <!-- Sección de Servicios Pendientes -->
+        <section class="seccion-servicios">
+            <table class="TablaSec">
+                <tr>
+                    <td colspan="6">
+                      <h2>Servicios Pendientes.</h2>
+                    </td>
+                </tr>
+                <tr style="border-collapse: separate; border: 1px solid black;">
+                    <td><h2>ID</h2></td>
+                    <td><h2>Nombre</h2></td>
+                    <td><h2>Equipo</h2></td>
+                    <td><h2>Fecha</h2></td>
+                </tr>
+                <tr class="Casilla">
+                    <td>1</td>
+                    <td>Mart</td>
+                    <td>Husk-erramienta</td>
+                    <td>13/1072026</td>
+                    <td><button type="button" class="btn-editar">&#9998;</button></td>
+                    <td><button type="button" class="btn-finalizar">Finalizar</button></td>
+                </tr>
+                <tr class="Casilla">
+                    <td>2</td>
+                    <td>Mart</td>
+                    <td>Husk-erramienta</td>
+                    <td>13/1072026</td>
+                    <td><button type="button" class="btn-editar">&#9998;</button></td>
+                    <td><button type="button" class="btn-finalizar">Finalizar</button></td>
+                </tr>
+                <tr class="Casilla">
+                    <td>3</td>
+                    <td>Mart</td>
+                    <td>Husk-erramienta</td>
+                    <td>13/1072026</td>
+                    <td><button type="button" class="btn-editar">&#9998;</button></td>
+                    <td><button type="button" class="btn-finalizar">Finalizar</button></td>
+                </tr>
+            </table>
+        </section>
+    </main>
+
+    <dialog id="modal-contenedor" class="modal-overlay">
+        <div class="modal-caja" id="modal-caja"></div>
+    </dialog>
+
+    <script src="PagPScripts/PagP.js"></script>
+</body>
+</html>

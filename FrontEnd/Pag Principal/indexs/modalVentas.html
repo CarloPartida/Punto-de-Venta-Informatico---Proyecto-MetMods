@@ -1,0 +1,54 @@
+<div id="panel-venta" class="panel-modal" style="display: none;">
+    <table class="tabla-ventas">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Piezas</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-ventas-body">
+            <!-- Fila 1 -->
+            <tr>
+                <td><input type="text" placeholder="Producto" class="input-prod"></td>
+                <td><input type="text" placeholder="$0 MXN" class="input-precio"></td>
+                <td><span class="cant-piezas">0</span></td>
+                <td class="col-botones">
+                    <button type="button" class="btn-cant btn-mas">+</button>
+                    <button type="button" class="btn-cant btn-menos">-</button>
+                </td>
+            </tr>
+            <!-- Fila 2 -->
+            <tr>
+                <td><input type="text" placeholder="Producto" class="input-prod"></td>
+                <td><input type="text" placeholder="$0 MXN" class="input-precio"></td>
+                <td><span class="cant-piezas">0</span></td>
+                <td class="col-botones">
+                    <button type="button" class="btn-cant btn-mas">+</button>
+                    <button type="button" class="btn-cant btn-menos">-</button>
+                </td>
+            </tr>
+            <!-- Fila 3 -->
+            <tr>
+                <td><input type="text" placeholder="Producto" class="input-prod"></td>
+                <td><input type="text" placeholder="$0 MXN" class="input-precio"></td>
+                <td><span class="cant-piezas">0</span></td>
+                <td class="col-botones">
+                    <button type="button" class="btn-cant btn-mas">+</button>
+                    <button type="button" class="btn-cant btn-menos">-</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="campo-total">
+        <label for="costo-total">Costo Total.</label>
+        <input type="text" id="costo-total" readonly placeholder="$0.00">
+    </div>
+
+    <div class="acciones-venta">
+        <button type="button" id="btn-factura">Generar Factura</button>
+        <button type="submit" form="form-servicio" id="btn-guardar">Guardar</button>
+    </div>
+</div>

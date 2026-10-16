@@ -1,10 +1,38 @@
-<div id="panel-servicio" class="panel-modal">
+<div id="panel-servicio" class="panel-modal" style="background-color: #E5EFEA;">
+    <style>
+    input[type="text"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 8px 2px;
+      font: inherit;
+      color: var(--principal);
+      background: transparent;
+      border: 0;
+      border-bottom: 2px solid var(--principal);
+      border-radius: 0;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="number"]:focus,
+    input[type="tel"]:focus {
+      outline: none;
+      border-bottom-color: var(--complementario);
+      box-shadow: 0 2px 0 0 var(--complementario);
+    }
+    </style>
+
     <h3>Nuevo Servicio / Editar</h3>
-    
+            <!--#2D3535 - Principal
+            #E5EFEA - Secundario
+            #4CA0A0 - Complementario
+            -->
     <form id="form-servicio">
         <div class="campo">
             <label for="equipo">Equipo.</label>
-            <input type="text" id="equipo" name="equipo">
+            <input type="text" id="equipo" name="equipo" >
         </div>
 
         <div class="campo">
@@ -18,8 +46,9 @@
         </div>
 
         <!-- Subsección Datos del Cliente -->
-        <fieldset class="grupo-cliente">
-            <legend>Datos del Cliente</legend>
+        <fieldset class="grupo-cliente" style="margin-top: 10px">
+            <legend style="background: #4CA0A0; text-align: center; width: 100%; 
+            border: 1px solid black; border-radius: 5px;">Datos del Cliente</legend>
 
             <div class="campo">
                 <label for="cliente-nombre">Nombre.</label>

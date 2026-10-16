@@ -1,5 +1,33 @@
-<div id="panel-venta" class="panel-modal" style="display: none;">
-    <table class="tabla-ventas">
+<div id="panel-venta" class="panel-modal" style="display: none; background-color: #E5EFEA;">
+<!--#2D3535 - Principal
+    #E5EFEA - Secundario
+    #4CA0A0 - Complementario
+    -->
+    <style>
+        table.tabla-ventas,table.tabla-ventas td,table.tabla-ventas tr, table.tabla-ventas th{
+        border: 1px solid black; 
+        border-collapse: collapse;
+        }
+        table.tabla-ventas th{
+        background-color: #4CA0A0;
+        }
+
+        button{
+        width: 100%;
+        min-width: 0;
+        height: 100%;
+        box-sizing: border-box;
+        font-size: clamp(12px, 2.5vw, 30px);
+        border-radius: 30px;
+        background-color: white;
+        }
+
+        button:hover{
+        background-color: #2D3535;
+        color: #E5EFEA;
+        }
+    </style>
+    <table class="tabla-ventas" style="border-radius: 5px; border-collapse: separate;">
         <thead>
             <tr>
                 <th>Producto</th>
@@ -41,14 +69,17 @@
             </tr>
         </tbody>
     </table>
-
-    <div class="campo-total">
+    <div class="campo-total" style="margin-top: 10px; margin-bottom: 10px;">
         <label for="costo-total">Costo Total.</label>
         <input type="text" id="costo-total" readonly placeholder="$0.00">
     </div>
-
-    <div class="acciones-venta">
-        <button type="button" id="btn-factura">Generar Factura</button>
-        <button type="submit" form="form-servicio" id="btn-guardar">Guardar</button>
-    </div>
+    <table>
+        <tr>
+            <div class="acciones-venta">
+                <td colspan="3"><button type="button" id="btn-factura">Generar Factura</button></td>
+                <td colspan="2"><button type="submit" form="form-servicio" id="btn-guardar"
+                     style="background-color: #4CA0A0;">Guardar</button></td>
+            </div>
+        </tr>
+    </table>
 </div>

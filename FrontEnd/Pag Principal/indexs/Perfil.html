@@ -1,12 +1,30 @@
-<div id="panel-perfil" style="display: none;">
-    <div>
-        <p>• Usuario</p>
-        <p>• Correo</p>
-    </div>
-
-    <div>
-        <button type="button">Registro de Auditoría</button>
-        <button type="button">Cambiar datos de Soporte</button>
-        <button type="button">Cerrar Sesión</button>
+<div id="panel-perfil">
+    <div class="perfil-card">
+        <div class="perfil-container">
+            <img src="OSSS.png" alt="Foto de perfil" class="img-perfil">
+            <div class="info-usuario">
+                <h3 id="perfil-usuario">Usuario</h3>
+                <h3 id="perfil-correo">Correo</h3>
+            </div>
+        </div>
+        <div>
+            <table class="botonesPerfil">
+                <tr>
+                    <td>
+                        <button type="button" class="btn-perfil-primario">Registro de Auditoría</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" class="btn-perfil-primario">Cambiar datos de Soporte</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" id="btn-cerrar-sesion" class="btn-perfil-secundario">Cerrar Sesión</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>

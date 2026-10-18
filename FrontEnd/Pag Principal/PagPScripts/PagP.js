@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnMenu = document.getElementById('btn-menu');
     const btnAgregar = document.getElementById('btn-agregar');
+    const btnCartera = document.getElementById('btn-cartera');
 
     // Variables de control del modal
     let form, chkVenta, panelVenta, tbodyVentas, costoTotal, btnGuardar,
@@ -410,6 +411,14 @@ function crearFila(servicio) {
 
         if (modalContenedor) {
             modalContenedor.addEventListener('close', limpiarFormulario);
+        }
+
+        // Redirección a Cartera de Clientes
+        const btnCartera = document.getElementById('btn-cartera');
+        if (btnCartera) {
+            btnCartera.addEventListener('click', () => {
+                window.location.href = '../Car Clientes/CarC.html';
+            });
         }
 
         limpiarFormulario();

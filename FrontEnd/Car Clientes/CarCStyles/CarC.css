@@ -1,0 +1,63 @@
+:root {
+  --principal: #2D3535;
+  --secundario: #E5EFEA;
+  --complementario: #4CA0A0;
+}
+
+body{
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+div.cartClientes{
+    background-color: var(--complementario);
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px;
+}
+
+
+th, td{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+}
+
+table{
+    background-color: transparent;
+    width:100%;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    table-layout: fixed;
+    box-sizing: border-box;
+}
+
+button{
+    width: 45%;
+    min-width: 0;
+    height: 100%;
+    box-sizing: border-box;
+    font-size: clamp(12px, 2.5vw, 30px);
+    border-radius: 5px;
+    background-color: white;
+}
+
+button:hover{
+    background-color: var(--principal);
+    color:white;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 3vw;
+    }
+    td, th{
+        width: 5vw;
+    }
+    button{
+        width:50%;
+    }
+}

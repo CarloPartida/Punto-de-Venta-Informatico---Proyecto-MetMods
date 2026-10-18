@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo / Editar Cliente</title>
+    <link rel="stylesheet" href="../CarCStyles/NuEd.css">
+</head>
+<body>
+    <div class="NueEd">
+        <header>
+            <h2>Nuevo/Editar Cliente</h2>
+        </header>
+        <nav>
+            <h3>Registra un nuevo o edita un Cliente</h3>
+        </nav>
+        <form id="form-cliente">
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <br>
+            <div>
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" name="edad">
+            </div>
+            <br>
+            <div>
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono">
+            </div>
+            <br>
+            <div>
+                <label for="localidad">Localidad:</label>
+                <input type="text" id="localidad" name="localidad">
+            </div>
+            <br>
+            <div>
+                <button type="button" id="btn-cancelar">Cancelar</button>
+                <button type="submit" id="btn-guardar" style="background-color: #4CA0A0;">Confirmar</button>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="../CarCScripts/NuEd.js"></script>
+</body>
+</html>

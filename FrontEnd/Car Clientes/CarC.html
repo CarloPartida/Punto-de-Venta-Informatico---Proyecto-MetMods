@@ -10,6 +10,7 @@
     <div class="cartClientes">
         <header>
             <h1>Carteras de Clientes</h1>
+            <a href="../Pag%20Principal/PagP.html" id="enlace-regresar">&larr; Volver a la página principal</a>
         </header>
         <!-- Tabla con el listado de clientes -->
         <table>
@@ -24,28 +25,9 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Fila con data-id y clase btn-editar agregados -->
-                <tr data-id="1">
-                    <td colspan="1">1</td>
-                    <td colspan="4">Mart Perez SixSv.</td>
-                    <td colspan="2">123456789</td>
-                    <td colspan="3">Lomas de Mart</td>
-                    <td colspan="1">
-                        <button type="button" class="btn-editar">&#9998</button>
-                        <button type="button" class="btn-eliminar">&#128465</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="1">&nbsp;</td>
-                    <td colspan="4"></td>
-                    <td colspan="2"></td>
-                    <td colspan="3"></td>
-                    <td colspan="1">
-                    </td>
-                </tr>
-            </tbody>
+            <tbody id="lista-clientes"></tbody>
         </table>
+        <p id="aviso" role="status"></p>
     </div>
 
     <script src="CarCScripts/CarC.js"></script>

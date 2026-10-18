@@ -5,6 +5,7 @@ require('dotenv').config();
 // Rutas importadas por módulo
 const loginRoutes = require('./Routes/loginRouter');
 const pagpRouter = require('./Routes/pagpRouter');
+const carcRouter = require('./Routes/carcRouter');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, '../FrontEnd')));
 // Uso de enrutadores
 app.use(loginRoutes);
 app.use('/api/servicios', pagpRouter);
+app.use('/api/clientes', carcRouter);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../FrontEnd/Login/Login.html'));

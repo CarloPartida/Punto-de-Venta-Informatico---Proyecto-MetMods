@@ -61,3 +61,19 @@ button:hover{
         width:50%;
     }
 }
+
+/* Fila enfocada con el teclado (flechas arriba/abajo) */
+tbody tr:focus {
+    outline: 3px solid var(--principal);
+    outline-offset: -3px;
+}
+
+/* Mensajes de estado debajo de la tabla */
+#aviso {
+    text-align: center;
+    font-weight: 600;
+}
+
+#enlace-regresar {
+    color: var(--principal);
+}

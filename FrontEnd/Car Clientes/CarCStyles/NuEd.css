@@ -4,77 +4,112 @@
   --complementario: #4CA0A0;
 }
 
-body{
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-}
-
-div.NueEd{
+div.NueEd {
     background-color: var(--secundario);
     border: 2px solid black;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 5px;
-    width: 35%;
-}
-
-nav{
-    background-color: var(--complementario);
-    border: 2px solid black;
-    border-radius: 5px;
-    margin: 20px;
-}
-
-nav h3{
-    margin: 5px;
-}
-
-button{
-    width: 45%;
-    min-width: 0;
-    height: 100%;
+    border-radius: 8px;
+    margin: auto;
+    padding: 15px;
+    width: 340px;
+    max-width: 90vw;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
-    font-size: clamp(12px, 2.5vw, 30px);
+}
+
+div.NueEd h3#modal-titulo {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: var(--principal);
+}
+
+div.NueEd nav {
+    background-color: var(--complementario);
+    border: 1px solid black;
     border-radius: 5px;
+    margin: 10px 0 15px 0;
+    padding: 6px;
+    text-align: center;
+}
+
+div.NueEd nav h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: white;
+    font-weight: normal;
+}
+
+.mensaje-error {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+div.NueEd .campo-grupo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 8px;
+}
+
+div.NueEd .campo-grupo label {
+    width: 80px;
+    font-weight: bold;
+    color: var(--principal);
+}
+
+div.NueEd input[type="text"],
+div.NueEd input[type="tel"],
+div.NueEd input[type="number"] {
+    flex: 1;
+    width: 100%;
+    padding: 4px 2px;
+    font: inherit;
+    color: var(--principal);
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--principal);
+    border-radius: 0;
+    box-sizing: border-box;
+}
+
+div.NueEd input[type="text"]:focus,
+div.NueEd input[type="tel"]:focus,
+div.NueEd input[type="number"]:focus {
+    outline: none;
+    border-bottom-color: var(--complementario);
+    box-shadow: 0 2px 0 0 var(--complementario);
+}
+
+div.NueEd .acciones-modal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+div.NueEd button {
+    width: 48%;
+    padding: 6px 12px;
+    font-size: 1rem;
+    border-radius: 20px;
+    border: 1px solid black;
     background-color: white;
+    cursor: pointer;
 }
 
-button:hover{
+div.NueEd button.btn-confirmar {
+    background-color: var(--complementario);
+    color: white;
+}
+
+div.NueEd button:hover {
     background-color: var(--principal);
-    color:white;
-}
-
-input[type="text"],
-input[type="tel"],
-input[type="number"] {
-  width: 100%;
-  padding: 8px 2px;
-  font: inherit;
-  color: var(--principal);
-  background: transparent;
-  border: 0;
-  border-bottom: 2px solid var(--principal);
-  border-radius: 0;
-}
-
-input[type="text"]:focus,
-input[type="tel"]:focus,
-input[type="number"]:focus {
-  outline: none;
-  border-bottom-color: var(--complementario);
-  box-shadow: 0 2px 0 0 var(--complementario);
+    color: white;
 }
 
 @media screen and (max-width: 768px) {
-    body {
-        font-size: 3vw;
-    }
-    div.NueEd{
-        width: 75vw;
-    }
-    td, th{
-        width: 5vw;
-    }
-    button{
-        width:50%;
+    div.NueEd {
+        width: 85vw;
     }
 }

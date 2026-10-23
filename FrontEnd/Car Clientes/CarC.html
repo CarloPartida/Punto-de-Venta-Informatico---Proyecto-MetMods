@@ -5,31 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cartera de Clientes</title>
     <link rel="stylesheet" href="CarCStyles/CarC.css">
+    <link rel="stylesheet" href="CarCStyles/NuEd.css">
 </head>
 <body>
-    <div class="cartClientes">
-        <header>
-            <h1>Carteras de Clientes</h1>
-            <a href="../Pag%20Principal/PagP.html" id="enlace-regresar">&larr; Volver a la página principal</a>
-        </header>
-        <!-- Tabla con el listado de clientes -->
-        <table>
-            <thead>
-                <tr>
-                    <th colspan="1">No. del Cliente</th>
-                    <th colspan="4">Nombre del referente</th>
-                    <th colspan="2">Teléfono</th>
-                    <th colspan="3">Localidad</th>
-                    <th colspan="1"style="border: 0px; background-color: transparent">
-                        <button type="button" id="btn-agregar">+</button>
-                    </th>
-                </tr>
-            </thead>
-            <tbody id="lista-clientes"></tbody>
-        </table>
-        <p id="aviso" role="status"></p>
-    </div>
+    <main class="contenedor-principal">
+        <h2 class="titulo-modulo">Carteras de Clientes</h2>
 
+        <section class="cartClientes">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No. del Cliente</th>
+                        <th>Nombre del referente</th>
+                        <th>Telefono</th>
+                        <th>Localidad</th>
+                        <th class="col-accion-header">
+                            <button type="button" id="btn-agregar" class="btn-agregar">+</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="lista-clientes"></tbody>
+            </table>
+            <div id="aviso"></div>
+        </section>
+    </main>
+
+    <!-- Modal contenedor para NuEd.html -->
+    <dialog id="modal-contenedor">
+        <div id="modal-caja"></div>
+    </dialog>
+
+    <script src="CarCScripts/NuEd.js"></script>
     <script src="CarCScripts/CarC.js"></script>
 </body>
 </html>

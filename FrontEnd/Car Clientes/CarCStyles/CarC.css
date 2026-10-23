@@ -4,76 +4,157 @@
   --complementario: #4CA0A0;
 }
 
-body{
+body {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    margin: 0;
+    padding: 15px;
+    background-color: #ffffff;
 }
 
-div.cartClientes{
+/* Contenedor principal a pantalla completa */
+main.contenedor-principal {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.titulo-modulo {
+    margin: 0 0 10px 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--principal);
+}
+
+/* Caja Turquesa principal que abarca todo el ancho */
+section.cartClientes, div.cartClientes {
     background-color: var(--complementario);
-    border: 2px solid black;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 5px;
+    border: 2px solid var(--principal);
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
+/* Configuración de la tabla e individualización de celdas */
+table {
+    background-color: transparent;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 6px 8px;
+    table-layout: fixed; /* Mantiene fijas las proporciones de columna */
+    box-sizing: border-box;
+}
 
-th, td{
+/* Anchos proporcionales exactos al mockup */
+th:nth-child(1), td:nth-child(1) { width: 12%; } /* No. del Cliente */
+th:nth-child(2), td:nth-child(2) { width: 38%; } /* Nombre del referente */
+th:nth-child(3), td:nth-child(3) { width: 20%; } /* Telefono */
+th:nth-child(4), td:nth-child(4) { width: 20%; } /* Localidad */
+th:nth-child(5), td:nth-child(5) { width: 10%; } /* Botón + y acciones */
+
+/* Encabezados de tabla */
+th {
     background-color: white;
-    border: 1px solid black;
-    border-radius: 10px;
+    border: 1px solid var(--principal);
+    border-radius: 6px;
+    padding: 8px 10px;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--principal);
+}
+
+th.col-accion-header {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* Botón + en el Header */
+.btn-agregar {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: 1px solid var(--principal);
+    background-color: white;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-agregar:hover {
+    background-color: var(--principal);
+    color: white;
+}
+
+/* Celdas de datos */
+td {
+    background-color: white;
+    border: 1px solid var(--principal);
+    border-radius: 6px;
+    padding: 8px 10px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--principal);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+td.col-acciones {
+    background: white;
+    border: 1px solid var(--principal);
+    border-radius: 6px;
+    padding: 4px;
+    white-space: nowrap;
     text-align: center;
 }
 
-table{
-    background-color: transparent;
-    width:100%;
-    border-radius: 5px;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    table-layout: fixed;
-    box-sizing: border-box;
-}
-
-button{
-    width: 45%;
-    min-width: 0;
-    height: 100%;
-    box-sizing: border-box;
-    font-size: clamp(12px, 2.5vw, 30px);
-    border-radius: 5px;
+/* Botones Editar y Eliminar */
+.btn-editar, .btn-eliminar {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid var(--principal);
     background-color: white;
+    cursor: pointer;
+    margin: 0 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-button:hover{
+.btn-editar:hover, .btn-eliminar:hover {
     background-color: var(--principal);
-    color:white;
+    color: white;
 }
 
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 3vw;
-    }
-    td, th{
-        width: 5vw;
-    }
-    button{
-        width:50%;
-    }
+/* Contenedor emergente modal (<dialog>) */
+dialog#modal-contenedor {
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: auto;
+    overflow: visible;
 }
 
-/* Fila enfocada con el teclado (flechas arriba/abajo) */
+dialog#modal-contenedor::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Navegación por teclado */
 tbody tr:focus {
-    outline: 3px solid var(--principal);
-    outline-offset: -3px;
+    outline: 2px solid var(--principal);
+    outline-offset: 2px;
 }
 
-/* Mensajes de estado debajo de la tabla */
+/* Mensaje de aviso/estado */
 #aviso {
     text-align: center;
     font-weight: 600;
-}
-
-#enlace-regresar {
-    color: var(--principal);
+    margin-top: 10px;
 }

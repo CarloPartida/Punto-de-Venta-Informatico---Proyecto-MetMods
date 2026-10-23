@@ -1,49 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo / Editar Cliente</title>
-    <link rel="stylesheet" href="../CarCStyles/NuEd.css">
-</head>
-<body>
-    <div class="NueEd">
-        <header>
-            <h2>Nuevo/Editar Cliente</h2>
-        </header>
-        <nav>
-            <h3>Registra un nuevo o edita un Cliente</h3>
-        </nav>
-        <form id="form-cliente">
-            <div>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required maxlength="100">
-            </div>
-            <br>
-            <div>
-                <label for="edad">Edad:</label>
-                <input type="number" id="edad" name="edad" min="0" max="120">
-            </div>
-            <br>
-            <div>
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" maxlength="20">
-            </div>
-            <br>
-            <div>
-                <label for="localidad">Localidad:</label>
-                <input type="text" id="localidad" name="localidad" maxlength="100">
-            </div>
-            <br>
-            <p id="mensaje-error" role="alert" hidden></p>
-            <div>
-                <button type="button" id="btn-cancelar">Cancelar</button>
-                <button type="submit" id="btn-guardar" style="background-color: #4CA0A0;">Confirmar</button>
-            </div>
-        </form>
-    </div>
+<div class="NueEd">
+    <h3 id="modal-titulo">Nuevo/Editar Cliente</h3>
+    <nav>
+        <h3>Registra un nuevo o edita un Cliente</h3>
+    </nav>
 
+    <p id="mensaje-error-modal" class="mensaje-error" hidden></p>
 
-    <script src="../CarCScripts/NuEd.js"></script>
-</body>
-</html>
+    <form id="form-cliente">
+        <div class="campo-grupo">
+            <label for="cliente-nombre">Nombre.</label>
+            <input type="text" id="cliente-nombre" name="nombre" required autocomplete="off">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="cliente-edad">Edad.</label>
+            <input type="number" id="cliente-edad" name="edad" min="0" max="120">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="cliente-telefono">Teléfono.</label>
+            <input type="tel" id="cliente-telefono" name="telefono">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="cliente-localidad">Localidad.</label>
+            <input type="text" id="cliente-localidad" name="localidad">
+        </div>
+
+        <div class="acciones-modal">
+            <button type="button" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
+            <button type="submit" id="btn-guardar" class="btn-confirmar">Confirmar</button>
+        </div>
+    </form>
+</div>

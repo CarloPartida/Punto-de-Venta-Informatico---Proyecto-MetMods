@@ -1,20 +1,9 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Rutas y constantes principales
+window.NuEd = (() => {
     const API = '/api/clientes';
-    const RUTA_LISTA = '../CarC.html';
+    let form, btnCancelar, btnGuardar, mensajeErrorModal, tituloModal, modalContenedor;
+    let clienteEditando = null;
 
-    // Elementos del DOM
-    const form = document.getElementById('form-cliente');
-    const btnCancelar = document.getElementById('btn-cancelar');
-    const btnGuardar = document.getElementById('btn-guardar');
-    const mensajeError = document.getElementById('mensaje-error');
-    const titulo = document.querySelector('header h2');
-
-    // Si la URL trae ?id=5 estamos editando; si no, es un cliente nuevo
-    const parametroId = new URLSearchParams(window.location.search).get('id');
-    const id = parametroId === null ? null : Number.parseInt(parametroId, 10);
-
-    // Envuelve fetch y lanza un error con el mensaje que manda el servidor
+    // Realiza peticiones HTTP centralizadas para el modal
     async function pedir(url, opciones = {}) {
         const respuesta = await fetch(url, {
             headers: { 'Content-Type': 'application/json' },
@@ -25,67 +14,104 @@ document.addEventListener('DOMContentLoaded', () => {
         return datos;
     }
 
+    // Muestra errores dentro del modal
     function mostrarError(texto) {
-        mensajeError.textContent = texto;
-        mensajeError.hidden = !texto;
-    }
-
-    // Deja activo solo "Cancelar" (por ejemplo si el cliente no existe)
-    function bloquearFormulario() {
-        [...form.elements].forEach((elemento) => {
-            if (elemento !== btnCancelar) elemento.disabled = true;
-        });
-    }
-
-    // Rellena el formulario con los datos del cliente a editar
-    async function cargarCliente() {
-        try {
-            const cliente = await pedir(`${API}/${id}`);
-            form.elements['nombre'].value = cliente.Nombre ?? '';
-            form.elements['edad'].value = cliente.Edad ?? '';
-            form.elements['telefono'].value = cliente.Telefono ?? '';
-            form.elements['localidad'].value = cliente.Localidad ?? '';
-            titulo.textContent = `Editar Cliente #${cliente.ID_Cliente}`;
-        } catch (error) {
-            mostrarError(error.message);
-            bloquearFormulario();
+        if (mensajeErrorModal) {
+            mensajeErrorModal.textContent = texto;
+            mensajeErrorModal.hidden = !texto;
         }
     }
 
-    // Guarda: POST si es nuevo, PUT si se está editando
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    // Limpia los campos del formulario
+    function limpiarFormulario() {
+        clienteEditando = null;
+        if (form) form.reset();
+        if (tituloModal) tituloModal.textContent = 'Nuevo/Editar Cliente';
         mostrarError('');
-        btnGuardar.disabled = true; // evita doble envío
-
-        const cuerpo = JSON.stringify({
-            nombre: form.elements['nombre'].value.trim(),
-            edad: form.elements['edad'].value.trim(),
-            telefono: form.elements['telefono'].value.trim(),
-            localidad: form.elements['localidad'].value.trim()
-        });
-
-        try {
-            if (id) await pedir(`${API}/${id}`, { method: 'PUT', body: cuerpo });
-            else await pedir(API, { method: 'POST', body: cuerpo });
-            window.location.href = RUTA_LISTA;
-        } catch (error) {
-            mostrarError(error.message);
-            btnGuardar.disabled = false;
-        }
-    });
-
-    btnCancelar.addEventListener('click', () => {
-        window.location.href = RUTA_LISTA;
-    });
-
-    // Arranque: nuevo o edición
-    if (parametroId === null) {
-        titulo.textContent = 'Nuevo Cliente';
-    } else if (!Number.isInteger(id) || id <= 0) {
-        mostrarError('El cliente que intentas editar no es válido');
-        bloquearFormulario();
-    } else {
-        cargarCliente();
     }
-});
+
+    // Extrae los valores ingresados en los inputs
+    function leerFormulario() {
+        const valor = (id) => document.getElementById(id)?.value.trim() || '';
+        return {
+            nombre: valor('cliente-nombre'),
+            edad: valor('cliente-edad'),
+            telefono: valor('cliente-telefono'),
+            localidad: valor('cliente-localidad')
+        };
+    }
+
+    // Inicializa los eventos del modal tras inyectar el HTML 
+    function init() {
+        modalContenedor = document.getElementById('modal-contenedor');
+        form = document.getElementById('form-cliente');
+        btnCancelar = document.getElementById('btn-cancelar');
+        btnGuardar = document.getElementById('btn-guardar');
+        mensajeErrorModal = document.getElementById('mensaje-error-modal');
+        tituloModal = document.getElementById('modal-titulo');
+
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                mostrarError('');
+                if (btnGuardar) btnGuardar.disabled = true;
+
+                try {
+                    const cuerpo = JSON.stringify(leerFormulario());
+                    if (clienteEditando) {
+                        await pedir(`${API}/${clienteEditando}`, { method: 'PUT', body: cuerpo });
+                    } else {
+                        await pedir(API, { method: 'POST', body: cuerpo });
+                    }
+                    cerrar();
+                    // Notifica a CarC.js que se guardaron cambios
+                    document.dispatchEvent(new CustomEvent('cliente-guardado'));
+                } catch (error) {
+                    mostrarError(error.message);
+                } finally {
+                    if (btnGuardar) btnGuardar.disabled = false;
+                }
+            });
+        }
+
+        if (btnCancelar) btnCancelar.addEventListener('click', cerrar);
+
+        if (modalContenedor) {
+            modalContenedor.addEventListener('close', limpiarFormulario);
+            modalContenedor.addEventListener('click', (e) => {
+                const rect = modalContenedor.getBoundingClientRect();
+                const clicDentro = (
+                    rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                    rect.left <= e.clientX && e.clientX <= rect.left + rect.width
+                );
+                if (!clicDentro) cerrar();
+            });
+        }
+    }
+
+    // Abre la ventana modal (vacía o rellenada si recibe un ID)
+    async function abrir(id = null) {
+        limpiarFormulario();
+        if (id) {
+            try {
+                const cliente = await pedir(`${API}/${id}`);
+                clienteEditando = cliente.ID_Cliente;
+                document.getElementById('cliente-nombre').value = cliente.Nombre ?? '';
+                document.getElementById('cliente-edad').value = cliente.Edad ?? '';
+                document.getElementById('cliente-telefono').value = cliente.Telefono ?? '';
+                document.getElementById('cliente-localidad').value = cliente.Localidad ?? '';
+                if (tituloModal) tituloModal.textContent = `Editar Cliente #${cliente.ID_Cliente}`;
+            } catch (error) {
+                mostrarError(error.message);
+            }
+        }
+        if (modalContenedor) modalContenedor.showModal();
+    }
+
+    // Cierra la ventana modal
+    function cerrar() {
+        if (modalContenedor) modalContenedor.close();
+    }
+
+    return { init, abrir, cerrar };
+})();

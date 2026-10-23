@@ -1,17 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Rutas y constantes principales
     const API = '/api/clientes';
-    const RUTA_NUED = 'index/NuEd.html';
 
-    // Elementos del DOM
+    const modalCaja = document.getElementById('modal-caja');
     const listaClientes = document.getElementById('lista-clientes');
     const aviso = document.getElementById('aviso');
     const btnAgregar = document.getElementById('btn-agregar');
 
-    // Muestra un mensaje de estado debajo de la tabla
-    const avisar = (texto) => { aviso.textContent = texto; };
-
-    // Envuelve fetch y lanza un error con el mensaje que manda el servidor
     async function pedir(url, opciones = {}) {
         const respuesta = await fetch(url, {
             headers: { 'Content-Type': 'application/json' },
@@ -22,72 +16,41 @@ document.addEventListener('DOMContentLoaded', () => {
         return datos;
     }
 
-    function crearBoton(texto, clase, etiqueta) {
-        const boton = document.createElement('button');
-        boton.type = 'button';
-        boton.className = clase;
-        boton.textContent = texto;
-        boton.setAttribute('aria-label', etiqueta);
-        return boton;
-    }
+    const avisar = (texto) => { if (aviso) aviso.textContent = texto; };
 
-    // Construye una fila con textContent (no innerHTML) para que ningún dato guardado inyecte HTML
     function crearFila(cliente) {
         const fila = document.createElement('tr');
+        fila.className = 'Casilla';
         fila.dataset.id = cliente.ID_Cliente;
-        fila.tabIndex = -1; // se puede enfocar con las flechas (RQNF 12)
+        fila.tabIndex = -1;
 
-        // [columnas que ocupa, valor] igual que en el encabezado de la tabla
-        const columnas = [
-            [1, cliente.ID_Cliente],
-            [4, cliente.Nombre],
-            [2, cliente.Telefono],
-            [3, cliente.Localidad]
-        ];
-        columnas.forEach(([span, valor]) => {
-            const celda = document.createElement('td');
-            celda.colSpan = span;
-            celda.textContent = valor ?? '';
-            fila.append(celda);
-        });
-
-        const acciones = document.createElement('td');
-        acciones.colSpan = 1;
-        acciones.append(
-            crearBoton('\u270E', 'btn-editar', 'Editar cliente'),
-            crearBoton('\u{1F5D1}', 'btn-eliminar', 'Eliminar cliente')
-        );
-        fila.append(acciones);
+        fila.innerHTML = `
+            <td>${cliente.ID_Cliente}</td>
+            <td>${cliente.Nombre ?? ''}</td>
+            <td>${cliente.Telefono ?? ''}</td>
+            <td>${cliente.Localidad ?? ''}</td>
+            <td class="col-acciones">
+                <button type="button" class="btn-editar" data-accion="editar" aria-label="Editar cliente">&#9998;</button>
+                <button type="button" class="btn-eliminar" data-accion="eliminar" aria-label="Eliminar cliente">&#128465;</button>
+            </td>
+        `;
         return fila;
     }
 
-    // Carga la cartera completa desde el servidor
     async function cargarClientes() {
+        if (!listaClientes) return;
         try {
             const clientes = await pedir(API);
             listaClientes.replaceChildren(...clientes.map(crearFila));
-
-            // Solo la primera fila entra en el orden del Tab; las flechas mueven entre filas
             if (listaClientes.firstElementChild) listaClientes.firstElementChild.tabIndex = 0;
-
             avisar(clientes.length ? '' : 'No hay clientes registrados.');
         } catch (error) {
             avisar(`No se pudo cargar la cartera: ${error.message}`);
         }
     }
 
-    // Abre la pantalla de captura (nuevo o editar)
-    function abrirFormulario(id) {
-        window.location.href = id ? `${RUTA_NUED}?id=${id}` : RUTA_NUED;
-    }
-
-    // Elimina un cliente previa confirmación (RQNF 16)
-    async function eliminarCliente(fila) {
-        const id = fila.dataset.id;
-        const nombre = fila.children[1].textContent;
-
-        if (!confirm(`¿Deseas eliminar definitivamente al cliente "${nombre}"?`)) return;
-
+    async function eliminarCliente(id) {
+        if (!confirm(`¿Deseas eliminar al cliente #${id}?`)) return;
         try {
             await pedir(`${API}/${id}`, { method: 'DELETE' });
             await cargarClientes();
@@ -96,39 +59,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    if (btnAgregar) btnAgregar.addEventListener('click', () => abrirFormulario());
-
-    // Un solo listener para todas las filas (se crean y borran dinámicamente)
-    listaClientes.addEventListener('click', (e) => {
-        const boton = e.target.closest('button');
-        if (!boton) return;
-        const fila = boton.closest('tr');
-
-        if (boton.classList.contains('btn-editar')) abrirFormulario(fila.dataset.id);
-        else if (boton.classList.contains('btn-eliminar')) eliminarCliente(fila);
-    });
-
-    // Navegación con teclado entre registros (RQNF 12)
-    listaClientes.addEventListener('keydown', (e) => {
-        const fila = e.target.closest('tr');
-        if (!fila) return;
-
-        let destino = null;
-        if (e.key === 'ArrowDown') destino = fila.nextElementSibling;
-        else if (e.key === 'ArrowUp') destino = fila.previousElementSibling;
-        else if (e.key === 'Home') destino = listaClientes.firstElementChild;
-        else if (e.key === 'End') destino = listaClientes.lastElementChild;
-        else if (e.key === 'Enter' && e.target === fila) {
-            abrirFormulario(fila.dataset.id);
-            return;
+    async function precargarModal() {
+        try {
+            const res = await fetch('index/NuEd.html');
+            if (res.ok && modalCaja) {
+                modalCaja.innerHTML = await res.text();
+                window.NuEd.init();
+            }
+        } catch (error) {
+            console.error('Error al cargar la plantilla del modal:', error);
         }
+    }
 
-        if (!destino) return;
-        e.preventDefault();
-        fila.tabIndex = -1;
-        destino.tabIndex = 0;
-        destino.focus();
-    });
+    if (listaClientes) {
+        listaClientes.addEventListener('click', (e) => {
+            const boton = e.target.closest('button[data-accion]');
+            if (!boton) return;
+            const id = boton.closest('[data-id]').dataset.id;
 
+            if (boton.dataset.accion === 'editar') window.NuEd.abrir(id);
+            else if (boton.dataset.accion === 'eliminar') eliminarCliente(id);
+        });
+
+        listaClientes.addEventListener('keydown', (e) => {
+            const fila = e.target.closest('tr');
+            if (!fila) return;
+
+            let destino = null;
+            if (e.key === 'ArrowDown') destino = fila.nextElementSibling;
+            else if (e.key === 'ArrowUp') destino = fila.previousElementSibling;
+            else if (e.key === 'Home') destino = listaClientes.firstElementChild;
+            else if (e.key === 'End') destino = listaClientes.lastElementChild;
+            else if (e.key === 'Enter' && e.target === fila) {
+                window.NuEd.abrir(fila.dataset.id);
+                return;
+            }
+
+            if (!destino) return;
+            e.preventDefault();
+            fila.tabIndex = -1;
+            destino.tabIndex = 0;
+            destino.focus();
+        });
+    }
+
+    if (btnAgregar) btnAgregar.addEventListener('click', () => window.NuEd.abrir());
+
+    document.addEventListener('cliente-guardado', cargarClientes);
+
+    precargarModal();
     cargarClientes();
 });

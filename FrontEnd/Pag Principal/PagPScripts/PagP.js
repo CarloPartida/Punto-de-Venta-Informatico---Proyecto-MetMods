@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnMenu = document.getElementById('btn-menu');
     const btnAgregar = document.getElementById('btn-agregar');
-    const btnCartera = document.getElementById('btn-cartera');
 
     // Variables de control del modal
     let form, chkVenta, panelVenta, tbodyVentas, costoTotal, btnGuardar,
@@ -52,38 +51,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Crea botones dinámicos
-    function crearBoton(texto, clase, accion, etiqueta) {
-        const boton = document.createElement('button');
-        boton.type = 'button';
-        boton.className = clase;
-        boton.textContent = texto;
-        boton.dataset.accion = accion;
-        if (etiqueta) boton.setAttribute('aria-label', etiqueta);
-        return boton;
-    }
-
     // Crea el HTML de un servicio en la lista
-function crearFila(servicio) {
-    const fila = document.createElement('tr');
-    fila.className = 'Casilla';
-    fila.dataset.id = servicio.ID_Servicio;
+    function crearFila(servicio) {
+        const fila = document.createElement('tr');
+        fila.className = 'Casilla';
+        fila.dataset.id = servicio.ID_Servicio;
 
-    fila.innerHTML = `
-        <td>${servicio.ID_Servicio}</td>
-        <td>${servicio.Nombre ?? ''}</td>
-        <td>${servicio.Equipo ?? ''}</td>
-        <td>${servicio.Fecha ?? ''}</td>
-        <td>
-            <button type="button" class="btn-editar" data-accion="editar" aria-label="Editar servicio">&#9998;</button>
-        </td>
-        <td>
-            <button type="button" class="btn-finalizar" data-accion="finalizar">Finalizar</button>
-        </td>
-    `;
+        fila.innerHTML = `
+            <td>${servicio.ID_Servicio}</td>
+            <td>${servicio.Nombre ?? ''}</td>
+            <td>${servicio.Equipo ?? ''}</td>
+            <td>${servicio.Fecha ?? ''}</td>
+            <td>
+                <button type="button" class="btn-editar" data-accion="editar" aria-label="Editar servicio">&#9998;</button>
+            </td>
+            <td>
+                <button type="button" class="btn-finalizar" data-accion="finalizar">Finalizar</button>
+            </td>
+        `;
 
-    return fila;
-}
+        return fila;
+    }
 
     // Carga los servicios pendientes desde el servidor
     async function cargarServicios() {
@@ -300,7 +288,6 @@ function crearFila(servicio) {
             const servicio = await pedir(`${API}/${servicioEditando}`);
             const doc = new jsPDF();
 
-            // Encabezado del PDF
             doc.setFontSize(18);
             doc.text('FACTURA DE SERVICIO - PUNTO DE VENTA', 14, 20);
 
@@ -314,7 +301,6 @@ function crearFila(servicio) {
 
             doc.line(14, 66, 196, 66);
 
-            // Lista de productos
             doc.setFontSize(12);
             doc.text('Refacciones / Productos:', 14, 74);
 
@@ -331,11 +317,9 @@ function crearFila(servicio) {
 
             doc.line(14, posY + 5, 196, posY + 5);
 
-            // Total
             doc.setFontSize(14);
             doc.text(`COSTO TOTAL: $${Number(servicio.Costo_Total).toFixed(2)} MXN`, 14, posY + 16);
 
-            // Descarga el PDF
             doc.save(`Factura_Servicio_${servicio.ID_Servicio}.pdf`);
             errorModal('');
         } catch (err) {
@@ -372,7 +356,6 @@ function crearFila(servicio) {
             });
         }
 
-        // Control de cantidad de piezas (+ / -)
         if (modalCaja) {
             modalCaja.addEventListener('click', (e) => {
                 const btn = e.target.closest('.btn-mas, .btn-menos');
@@ -389,7 +372,6 @@ function crearFila(servicio) {
                 }
             });
 
-            // Autocompleta precio al escribir un producto
             modalCaja.addEventListener('input', (e) => {
                 if (!e.target.matches('.input-prod, .input-precio')) return;
                 if (e.target.matches('.input-prod') && catalogo.has(e.target.value)) {
@@ -418,6 +400,14 @@ function crearFila(servicio) {
         if (btnCartera) {
             btnCartera.addEventListener('click', () => {
                 window.location.href = '../Car Clientes/CarC.html';
+            });
+        }
+
+        // Redirección a Inventario
+        const btnInventario = document.getElementById('btn-inventario');
+        if (btnInventario) {
+            btnInventario.addEventListener('click', () => {
+                window.location.href = '../Inventario/Inv.html';
             });
         }
 

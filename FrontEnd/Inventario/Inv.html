@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+</head>
+<body>
+    <main class="contenedor-principal">
+        <h2 class="titulo-modulo">Inventario</h2>
+
+        <section class="cartInventario">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Disponibilidad</th>
+                        <th>Código del Prod.</th>
+                        <th>Cod. Sat</th>
+                        <th class="col-accion-header">
+                            <button type="button" id="btn-agregar" class="btn-agregar">+</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="lista-productos">
+                    
+                    <tr class="Casilla">
+                        <td>Mouse</td>
+                        <td>"Mouse RGB"</td>
+                        <td>$67</td>
+                        <td>420</td>
+                        <td>XXXXXXXXXX</td>
+                        <td>XXXXXXX</td>
+                        <td class="col-acciones">
+                            <button type="button" class="btn-editar" data-accion="editar" aria-label="Editar producto">&#9998;</button>
+                            <button type="button" class="btn-eliminar" data-accion="eliminar" aria-label="Eliminar producto">&#128465;</button>
+                        </td>
+                    </tr>
+
+                    <tr class="Casilla">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="col-acciones">
+                            <button type="button" class="btn-editar" data-accion="editar" aria-label="Editar producto">&#9998;</button>
+                            <button type="button" class="btn-eliminar" data-accion="eliminar" aria-label="Eliminar producto">&#128465;</button>
+                        </td>
+                    </tr>
+                    <tr class="Casilla">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="col-acciones">
+                            <button type="button" class="btn-editar" data-accion="editar" aria-label="Editar producto">&#9998;</button>
+                            <button type="button" class="btn-eliminar" data-accion="eliminar" aria-label="Eliminar producto">&#128465;</button>
+                        </td>
+                    </tr>
+                    <tr class="Casilla">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="col-acciones">
+                            <button type="button" class="btn-editar" data-accion="editar" aria-label="Editar producto">&#9998;</button>
+                            <button type="button" class="btn-eliminar" data-accion="eliminar" aria-label="Eliminar producto">&#128465;</button>
+                        </td>
+                    </tr>
+                    <tr class="Casilla">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="col-acciones">
+                            <button type="button" class="btn-editar" data-accion="editar" aria-label="Editar producto">&#9998;</button>
+                            <button type="button" class="btn-eliminar" data-accion="eliminar" aria-label="Eliminar producto">&#128465;</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="aviso"></div>
+        </section>
+    </main>
+
+    <!-- Modal contenedor que recibe NuEdInv -->
+    <dialog id="modal-contenedor">
+        <div id="modal-caja"></div>
+    </dialog>
+
+    <script src="InvScripts/NuEdInv.js"></script>
+    <script src="InvScripts/Inv.js"></script>
+</body>
+</html>

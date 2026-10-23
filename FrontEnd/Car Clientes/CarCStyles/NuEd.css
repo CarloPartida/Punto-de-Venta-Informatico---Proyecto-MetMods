@@ -4,36 +4,39 @@
   --complementario: #4CA0A0;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 div.NueEd {
     background-color: var(--secundario);
-    border: 2px solid black;
+    border: 2px solid var(--principal);
     border-radius: 8px;
     margin: auto;
-    padding: 15px;
-    width: 340px;
-    max-width: 90vw;
+    padding: clamp(10px, 3vw, 20px);
+    width: 360px;
+    max-width: 92vw;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
 }
 
 div.NueEd h3#modal-titulo {
     margin: 0 0 10px 0;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
     color: var(--principal);
 }
 
 div.NueEd nav {
     background-color: var(--complementario);
-    border: 1px solid black;
+    border: 1px solid var(--principal);
     border-radius: 5px;
-    margin: 10px 0 15px 0;
+    margin: 8px 0 14px 0;
     padding: 6px;
     text-align: center;
 }
 
 div.NueEd nav h3 {
     margin: 0;
-    font-size: 0.95rem;
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
     color: white;
     font-weight: normal;
 }
@@ -43,6 +46,7 @@ div.NueEd nav h3 {
     text-align: center;
     font-weight: bold;
     margin-bottom: 10px;
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
 }
 
 div.NueEd .campo-grupo {
@@ -53,9 +57,11 @@ div.NueEd .campo-grupo {
 }
 
 div.NueEd .campo-grupo label {
-    width: 80px;
+    width: 85px;
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
     font-weight: bold;
     color: var(--principal);
+    flex-shrink: 0;
 }
 
 div.NueEd input[type="text"],
@@ -65,12 +71,12 @@ div.NueEd input[type="number"] {
     width: 100%;
     padding: 4px 2px;
     font: inherit;
+    font-size: clamp(0.85rem, 2vw, 1rem);
     color: var(--principal);
     background: transparent;
     border: 0;
     border-bottom: 2px solid var(--principal);
     border-radius: 0;
-    box-sizing: border-box;
 }
 
 div.NueEd input[type="text"]:focus,
@@ -78,24 +84,24 @@ div.NueEd input[type="tel"]:focus,
 div.NueEd input[type="number"]:focus {
     outline: none;
     border-bottom-color: var(--complementario);
-    box-shadow: 0 2px 0 0 var(--complementario);
 }
 
 div.NueEd .acciones-modal {
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 16px;
     gap: 10px;
 }
 
 div.NueEd button {
     width: 48%;
     padding: 6px 12px;
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 2vw, 1rem);
     border-radius: 20px;
-    border: 1px solid black;
+    border: 1px solid var(--principal);
     background-color: white;
     cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 div.NueEd button.btn-confirmar {
@@ -108,8 +114,13 @@ div.NueEd button:hover {
     color: white;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 480px) {
     div.NueEd {
-        width: 85vw;
+        width: 95vw;
+        padding: 12px;
+    }
+
+    div.NueEd .campo-grupo label {
+        width: 75px;
     }
 }

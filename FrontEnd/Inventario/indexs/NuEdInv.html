@@ -1,0 +1,50 @@
+<div class="NueEd">
+    <h3 id="modal-titulo">Nuevo / Editar Producto</h3>
+    <nav>
+        <h3>Registra un nuevo o edita un Producto</h3>
+    </nav>
+
+    <p id="mensaje-error-modal" class="mensaje-error" hidden></p>
+
+    <form id="form-producto">
+        <div class="campo-grupo">
+            <label for="prod-nombre">Producto.</label>
+            <input type="text" id="prod-nombre" name="nombre" required autocomplete="off">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="prod-descripcion">Descripción.</label>
+            <input type="text" id="prod-descripcion" name="descripcion">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="prod-precio">Precio.</label>
+            <input type="number" id="prod-precio" name="precio" step="0.01" min="0">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="prod-disponibilidad">Disponibilidad.</label>
+            <input type="number" id="prod-disponibilidad" name="disponibilidad" min="0">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="prod-codigo">Código del Prod.</label>
+            <input type="text" id="prod-codigo" name="codigo">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="prod-cod-sat">Cod. Sat.</label>
+            <input type="text" id="prod-cod-sat" name="cod_sat">
+        </div>
+
+        <div class="campo-checkbox">
+            <input type="checkbox" id="chk-no-inventariable" name="no_inventariable">
+            <label for="chk-no-inventariable">No inventariable.</label>
+        </div>
+
+        <div class="acciones-modal">
+            <button type="button" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
+            <button type="submit" id="btn-guardar" class="btn-confirmar">Confirmar</button>
+        </div>
+    </form>
+</div>

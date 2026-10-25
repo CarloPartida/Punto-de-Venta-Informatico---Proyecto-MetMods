@@ -1,0 +1,160 @@
+:root {
+  --principal: #2D3535;
+  --secundario: #E5EFEA;
+  --complementario: #4CA0A0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    margin: 0;
+    padding: clamp(4px, 1.5vw, 15px);
+    background-color: #ffffff;
+}
+
+main.contenedor-principal{
+    background-color: #4CA0A0;
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 100%;
+}
+
+table {
+    background-color: transparent;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: clamp(2px, 0.8vw, 6px);
+    table-layout: fixed;
+    box-sizing: border-box;
+}
+
+th {
+    background-color: white;
+    border: 1px solid var(--principal);
+    border-radius: 5px;
+    padding: clamp(4px, 0.8vw, 8px) 2px;
+    text-align: center;
+    font-size: clamp(0.65rem, 1.8vw, 0.9rem);
+    font-weight: bold;
+    color: var(--principal);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+th.col-accion-header {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.btn-agregar {
+    width: clamp(26px, 3.5vw, 36px);
+    height: clamp(26px, 3.5vw, 36px);
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid var(--principal);
+    background-color: white;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-agregar:hover {
+    background-color: var(--principal);
+    color: white;
+}
+
+/* Celdas de datos */
+td {
+    background-color: white;
+    border: 1px solid var(--principal);
+    border-radius: 5px;
+    padding: clamp(4px, 0.8vw, 8px) 2px;
+    text-align: center;
+    font-size: clamp(0.65rem, 1.8vw, 0.9rem);
+    color: var(--principal);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+td.col-acciones {
+    background: white;
+    border: 1px solid var(--principal);
+    border-radius: 5px;
+    padding: 2px 1px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* Botones Editar y Eliminar */
+.btn-editar, .btn-eliminar {
+    width: clamp(20px, 2.8vw, 30px);
+    height: clamp(20px, 2.8vw, 30px);
+    padding: 0;
+    font-size: clamp(10px, 1.4vw, 14px);
+    border-radius: 4px;
+    border: 1px solid var(--principal);
+    background-color: white;
+    cursor: pointer;
+    margin: 0 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-editar:hover, .btn-eliminar:hover {
+    background-color: var(--principal);
+    color: white;
+}
+
+/* Modal Overlay (<dialog>) */
+dialog#modal-contenedor {
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: auto;
+    max-width: 95vw;
+    overflow: visible;
+}
+
+dialog#modal-contenedor::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+tbody tr:focus {
+    outline: 2px solid var(--principal);
+    outline-offset: 2px;
+}
+
+#aviso {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 8px;
+    font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+}
+
+/* Optimización extra para celulares angostos */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 4px;
+    }
+    section.cartClientes, div.cartClientes {
+        padding: 4px;
+    }
+    table {
+        border-spacing: 2px 4px;
+    }
+    th, td {
+        padding: 4px 1px;
+    }
+    .btn-editar, .btn-eliminar {
+        margin: 0;
+    }
+}

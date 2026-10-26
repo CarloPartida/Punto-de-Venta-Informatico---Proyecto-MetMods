@@ -158,3 +158,41 @@ tbody tr:focus {
         margin: 0;
     }
 }
+
+/* Disponibilidad con botones - y + (RQF 13, RQNF 17) */
+td.celda-disponibilidad {
+    white-space: nowrap;
+}
+
+.cant-disp {
+    display: inline-block;
+    min-width: 2.5ch;
+    font-weight: 600;
+}
+
+.etiqueta-no-inv {
+    font-style: italic;
+}
+
+.btn-cant {
+    width: clamp(18px, 2.4vw, 26px);
+    height: clamp(18px, 2.4vw, 26px);
+    padding: 0;
+    margin: 0 2px;
+    font-size: clamp(10px, 1.4vw, 14px);
+    font-weight: bold;
+    border-radius: 4px;
+    border: 1px solid var(--principal);
+    background-color: white;
+    cursor: pointer;
+}
+
+.btn-cant:hover:not(:disabled) {
+    background-color: var(--principal);
+    color: white;
+}
+
+.btn-cant:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}

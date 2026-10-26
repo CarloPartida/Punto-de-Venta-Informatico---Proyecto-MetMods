@@ -6,6 +6,7 @@ require('dotenv').config();
 const loginRoutes = require('./Routes/loginRouter');
 const pagpRouter = require('./Routes/pagpRouter');
 const carcRouter = require('./Routes/carcRouter');
+const invRouter = require('./Routes/invRouter');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.static(path.join(__dirname, '../FrontEnd')));
 app.use(loginRoutes);
 app.use('/api/servicios', pagpRouter);
 app.use('/api/clientes', carcRouter);
+app.use('/api/productos', invRouter);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../FrontEnd/Login/Login.html'));

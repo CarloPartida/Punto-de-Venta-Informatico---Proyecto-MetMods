@@ -9,32 +9,32 @@
     <form id="form-producto">
         <div class="campo-grupo">
             <label for="prod-nombre">Producto.</label>
-            <input type="text" id="prod-nombre" name="nombre" required autocomplete="off">
+            <input type="text" id="prod-nombre" name="nombre" required maxlength="100" autocomplete="off">
         </div>
 
         <div class="campo-grupo">
             <label for="prod-descripcion">Descripción.</label>
-            <input type="text" id="prod-descripcion" name="descripcion">
+            <input type="text" id="prod-descripcion" name="descripcion" maxlength="500">
         </div>
 
         <div class="campo-grupo">
             <label for="prod-precio">Precio.</label>
-            <input type="number" id="prod-precio" name="precio" step="0.01" min="0">
+            <input type="number" id="prod-precio" name="precio" step="0.01" min="0" max="99999999.99">
         </div>
 
         <div class="campo-grupo">
             <label for="prod-disponibilidad">Disponibilidad.</label>
-            <input type="number" id="prod-disponibilidad" name="disponibilidad" min="0">
+            <input type="number" id="prod-disponibilidad" name="disponibilidad" min="0" max="1000000" step="1">
         </div>
 
         <div class="campo-grupo">
             <label for="prod-codigo">Código del Prod.</label>
-            <input type="text" id="prod-codigo" name="codigo">
+            <input type="text" id="prod-codigo" name="codigo" maxlength="50">
         </div>
 
         <div class="campo-grupo">
             <label for="prod-cod-sat">Cod. Sat.</label>
-            <input type="text" id="prod-cod-sat" name="cod_sat">
+            <input type="text" id="prod-cod-sat" name="cod_sat" maxlength="50">
         </div>
 
         <div class="campo-checkbox">

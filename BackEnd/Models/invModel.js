@@ -62,7 +62,7 @@ async function obtenerPorId(id) {
     }
 }
 
-// Registra un nuevo producto (RQF 11)
+// Registra un nuevo producto
 async function crear(datos) {
     const db = await conexion();
     try {
@@ -84,7 +84,7 @@ async function crear(datos) {
     }
 }
 
-// Actualiza un producto (RQF 12). Devuelve false si no existe
+// Actualiza un producto. Devuelve false si no existe
 async function actualizar(id, datos) {
     const db = await conexion();
     try {
@@ -112,7 +112,7 @@ async function actualizar(id, datos) {
     }
 }
 
-// Suma o resta piezas en una sola sentencia, para que dos clics seguidos no se pisen (RQF 13).
+// Suma o resta piezas en una sola sentencia, para que dos clics seguidos no se pisen.
 // Devuelve la nueva disponibilidad, o null si el producto no existe
 async function ajustarDisponibilidad(id, cambio) {
     const db = await conexion();
@@ -139,14 +139,42 @@ async function ajustarDisponibilidad(id, cambio) {
     }
 }
 
-// Elimina un producto (RQF 14). Devuelve false si no existe
+// Descuenta piezas por nombre al realizar una venta en la Pagina Principal
+async function descontarStockPorNombre(nombre, cantidad, dbExterna = null) {
+    if (!nombre || cantidad <= 0) return;
+    const db = dbExterna || await conexion();
+
+    try {
+        const [resultado] = await db.execute(`
+            UPDATE Producto
+            SET Disponibilidad = Disponibilidad - ?
+            WHERE Nombre = ? AND No_Invent = 0 AND Disponibilidad >= ?
+        `, [cantidad, nombre, cantidad]);
+
+        // Si no afectó filas, verifica si no había suficiente stock
+        if (resultado.affectedRows === 0) {
+            const [filas] = await db.execute(
+                'SELECT No_Invent, Disponibilidad FROM Producto WHERE Nombre = ?',
+                [nombre]
+            );
+
+            if (filas[0] && !filas[0].No_Invent && filas[0].Disponibilidad < cantidad) {
+                throw errorHttp(`Stock insuficiente para "${nombre}". Disponibles: ${filas[0].Disponibilidad}`, 409);
+            }
+        }
+    } finally {
+        if (!dbExterna) await db.end();
+    }
+}
+
+// Elimina un producto. Devuelve false si no existe
 async function eliminar(id) {
     const db = await conexion();
     try {
         const [resultado] = await db.execute('DELETE FROM Producto WHERE ID_Producto = ?', [id]);
         return resultado.affectedRows > 0;
     } catch (error) {
-        // 1451: la llave foránea impide borrar (está en el detalle de alguna venta) (RQNF 18)
+        // 1451: la llave foránea impide borrar (está en el detalle de alguna venta)
         if (error.errno === 1451) {
             throw errorHttp('No se puede eliminar: el producto está ligado a servicios o ventas', 409);
         }
@@ -156,4 +184,12 @@ async function eliminar(id) {
     }
 }
 
-module.exports = { listar, obtenerPorId, crear, actualizar, ajustarDisponibilidad, eliminar };
+module.exports = { 
+    listar, 
+    obtenerPorId, 
+    crear, 
+    actualizar, 
+    ajustarDisponibilidad, 
+    descontarStockPorNombre, 
+    eliminar 
+};

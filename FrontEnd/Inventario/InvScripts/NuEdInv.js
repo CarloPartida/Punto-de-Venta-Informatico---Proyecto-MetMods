@@ -23,7 +23,7 @@ window.NuEdInv = (() => {
         }
     }
 
-    // RQNF 20 y 21: si el producto es "No inventariable", la disponibilidad queda en 0 y se bloquea
+    // Si el producto es "No inventariable", la disponibilidad queda en 0 y se bloquea
     function sincronizarNoInventariable() {
         if (!chkNoInventariable || !inputDisponibilidad) return;
         if (chkNoInventariable.checked) inputDisponibilidad.value = '0';

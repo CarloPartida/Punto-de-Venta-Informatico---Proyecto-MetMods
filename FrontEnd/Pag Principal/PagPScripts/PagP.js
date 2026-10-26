@@ -108,22 +108,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Carga el catálogo de productos
+    // Carga el catálogo de productos desde el inventario (/api/productos)
     async function cargarProductos() {
         try {
-            const productos = await pedir(`${API}/productos`);
+            const productos = await pedir('/api/productos');
             catalogo.clear();
-            const datalist = document.getElementById('lista-productos');
-            if (datalist) {
-                datalist.replaceChildren(
-                    ...productos.map((p) => {
-                        catalogo.set(p.Nombre, Number(p.Precio));
-                        const opcion = document.createElement('option');
-                        opcion.value = p.Nombre;
-                        return opcion;
-                    })
-                );
+
+            let datalist = document.getElementById('lista-productos');
+            if (!datalist) {
+                datalist = document.createElement('datalist');
+                datalist.id = 'lista-productos';
+                document.body.appendChild(datalist);
             }
+
+            datalist.replaceChildren(
+                ...productos.map((p) => {
+                    catalogo.set(p.Nombre, Number(p.Precio));
+                    const opcion = document.createElement('option');
+                    opcion.value = p.Nombre;
+                    opcion.textContent = `$${Number(p.Precio).toFixed(2)}`;
+                    return opcion;
+                })
+            );
+
+            // Asigna el datalist a todos los inputs de producto existentes
+            document.querySelectorAll('.input-prod').forEach((input) => {
+                input.setAttribute('list', 'lista-productos');
+            });
         } catch (error) {
             console.error('No se pudo cargar el catálogo de productos:', error);
         }
@@ -149,7 +160,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Agrega una fila nueva a la tabla de ventas
     function agregarFilaVenta() {
         if (tbodyVentas && plantillaFila) {
-            tbodyVentas.append(plantillaFila.cloneNode(true));
+            const nuevaFila = plantillaFila.cloneNode(true);
+            const inputProd = nuevaFila.querySelector('.input-prod');
+            if (inputProd) inputProd.setAttribute('list', 'lista-productos');
+            tbodyVentas.append(nuevaFila);
         }
     }
 
@@ -159,7 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (form) form.reset();
         if (tbodyVentas && plantillaFila) {
             tbodyVentas.replaceChildren(
-                ...Array.from({ length: FILAS_INICIALES }, () => plantillaFila.cloneNode(true))
+                ...Array.from({ length: FILAS_INICIALES }, () => {
+                    const fila = plantillaFila.cloneNode(true);
+                    const inProd = fila.querySelector('.input-prod');
+                    if (inProd) inProd.setAttribute('list', 'lista-productos');
+                    return fila;
+                })
             );
         }
         if (panelVenta) panelVenta.style.display = 'none';
@@ -196,7 +215,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     const inPrecio = fila.querySelector('.input-precio');
                     const spanCant = fila.querySelector('.cant-piezas');
 
-                    if (inProd) inProd.value = detalle.producto;
+                    if (inProd) {
+                        inProd.value = detalle.producto;
+                        inProd.setAttribute('list', 'lista-productos');
+                    }
                     if (inPrecio) inPrecio.value = dinero(detalle.precio);
                     if (spanCant) spanCant.textContent = detalle.piezas;
                 }
@@ -344,8 +366,10 @@ document.addEventListener('DOMContentLoaded', () => {
             plantillaFila = tbodyVentas.rows[0].cloneNode(true);
         }
 
+        // Habilitar la edición manual en el campo de Costo Total
         if (costoTotal) {
             costoTotal.readOnly = false;
+            costoTotal.removeAttribute('readonly');
             costoTotal.setAttribute('autocomplete', 'off');
         }
 
@@ -357,6 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (modalCaja) {
+            // Incrementar / decrementar piezas (+ / -)
             modalCaja.addEventListener('click', (e) => {
                 const btn = e.target.closest('.btn-mas, .btn-menos');
                 if (!btn) return;
@@ -372,14 +397,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            // Autocompletado de precio y recálculo automático
             modalCaja.addEventListener('input', (e) => {
-                if (!e.target.matches('.input-prod, .input-precio')) return;
-                if (e.target.matches('.input-prod') && catalogo.has(e.target.value)) {
-                    const fila = e.target.closest('tr');
-                    const inPrecio = fila ? fila.querySelector('.input-precio') : null;
-                    if (inPrecio) inPrecio.value = dinero(catalogo.get(e.target.value));
+                if (!e.target.matches('.input-prod, .input-precio, #costo-total')) return;
+
+                if (e.target.matches('.input-prod')) {
+                    const nombreProducto = e.target.value.trim();
+                    if (catalogo.has(nombreProducto)) {
+                        const fila = e.target.closest('tr');
+                        const inPrecio = fila ? fila.querySelector('.input-precio') : null;
+                        if (inPrecio) {
+                            inPrecio.value = dinero(catalogo.get(nombreProducto));
+                        }
+                    }
                 }
-                recalcularTotal();
+
+                // Evita sobrescribir la suma si el usuario está escribiendo manualmente en el total
+                if (!e.target.matches('#costo-total')) {
+                    recalcularTotal();
+                }
             });
         }
 
@@ -395,7 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modalContenedor.addEventListener('close', limpiarFormulario);
         }
 
-        // Redirección a Cartera de Clientes
+        // Redirecciones
         const btnCartera = document.getElementById('btn-cartera');
         if (btnCartera) {
             btnCartera.addEventListener('click', () => {
@@ -403,7 +439,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Redirección a Inventario
         const btnInventario = document.getElementById('btn-inventario');
         if (btnInventario) {
             btnInventario.addEventListener('click', () => {

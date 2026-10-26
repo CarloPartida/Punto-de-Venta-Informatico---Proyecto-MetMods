@@ -44,7 +44,7 @@ function leerProducto(body = {}) {
         throw errorDeValidacion('El precio no es válido');
     }
 
-    // RQNF 20 y 21: un producto no inventariable siempre tiene disponibilidad 0
+    // Un producto no inventariable siempre tiene disponibilidad 0
     const noInventariable = body.noInventariable === true;
     let disponibilidad = noInventariable ? 0 : aNumero(body.disponibilidad);
     if (!Number.isInteger(disponibilidad) || disponibilidad < 0 || disponibilidad > 1000000) {

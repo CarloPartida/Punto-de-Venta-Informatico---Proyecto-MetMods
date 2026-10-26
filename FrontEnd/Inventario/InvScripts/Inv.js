@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return boton;
     }
 
-    // Celda de disponibilidad: [-] 420 [+] (RQF 13), o una etiqueta si no se inventaría
+    // Celda de disponibilidad: [-] [+], o una etiqueta si no se inventaría
     function crearCeldaDisponibilidad(producto) {
         const celda = document.createElement('td');
         celda.className = 'celda-disponibilidad';
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Suma o resta una pieza y actualiza solo esa celda (RQNF 19: sin recargar la tabla)
+    // Suma o resta una pieza y actualiza solo esa celda
     async function ajustarDisponibilidad(boton, cambio) {
         const fila = boton.closest('tr');
         const botones = fila.querySelectorAll('.btn-cant');
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
             avisar(error.message);
         } finally {
             botones.forEach((b) => { b.disabled = false; });
-            boton.focus(); // al deshabilitarse el botón se pierde el foco; así el teclado sigue (RQNF 17)
+            boton.focus(); // al deshabilitarse el botón se pierde el foco; así el teclado sigue
         }
     }
 

@@ -1,4 +1,5 @@
 const conexion = require('../database');
+const invModel = require('./invModel');
 
 // Busca un cliente por nombre y teléfono o lo crea si no existe
 async function resolverCliente(db, { nombre, edad, telefono }) {
@@ -15,11 +16,13 @@ async function resolverCliente(db, { nombre, edad, telefono }) {
     return resultado.insertId;
 }
 
-// Reemplaza el detalle de productos asociados a un servicio
+// Reemplaza el detalle de productos asociados a un servicio y descuenta el stock en Inventario
 async function guardarDetalle(db, idServicio, filas) {
     await db.execute('DELETE FROM Detalle_Venta WHERE ID_Servicio = ?', [idServicio]);
 
     for (const fila of filas) {
+        if (!fila.producto || fila.piezas <= 0) continue;
+
         const [producto] = await db.execute(
             'SELECT ID_Producto FROM Producto WHERE Nombre = ? LIMIT 1',
             [fila.producto]
@@ -29,10 +32,15 @@ async function guardarDetalle(db, idServicio, filas) {
             error.status = 400;
             throw error;
         }
+
+        // 1. Guarda el registro de la venta en el detalle del servicio
         await db.execute(
             'INSERT INTO Detalle_Venta (ID_Servicio, ID_Producto, Piezas, Precio_Unitario) VALUES (?, ?, ?, ?)',
             [idServicio, producto[0].ID_Producto, fila.piezas, fila.precio]
         );
+
+        // 2. Descuenta automáticamente el stock de la tabla Producto
+        await invModel.descontarStockPorNombre(fila.producto, fila.piezas, db);
     }
 }
 
@@ -95,7 +103,9 @@ async function crear(datos) {
         `, [idCliente, datos.equipo, datos.descripcion, datos.observaciones,
             datos.ventaActiva ? 1 : 0, datos.costoTotal]);
 
-        if (datos.ventaActiva) await guardarDetalle(db, resultado.insertId, datos.productos);
+        if (datos.ventaActiva && Array.isArray(datos.productos)) {
+            await guardarDetalle(db, resultado.insertId, datos.productos);
+        }
 
         await db.commit();
         return resultado.insertId;
@@ -139,7 +149,7 @@ async function actualizar(id, datos) {
         `, [idCliente, datos.equipo, datos.descripcion, datos.observaciones,
             datos.ventaActiva ? 1 : 0, datos.costoTotal, id]);
 
-        await guardarDetalle(db, id, datos.ventaActiva ? datos.productos : []);
+        await guardarDetalle(db, id, datos.ventaActiva && Array.isArray(datos.productos) ? datos.productos : []);
         await db.commit();
         return true;
     } catch (error) {

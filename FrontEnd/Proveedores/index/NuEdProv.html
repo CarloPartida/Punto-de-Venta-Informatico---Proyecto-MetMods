@@ -1,0 +1,35 @@
+<div class="NueEd">
+    <h3 id="modal-titulo">Nuevo / Editar Proveedor</h3>
+    <nav>
+        <h3>Registra un nuevo o edita un Proveedor</h3>
+    </nav>
+
+    <p id="mensaje-error-modal" class="mensaje-error" hidden></p>
+
+    <form id="form-proveedor">
+        <div class="campo-grupo">
+            <label for="prov-nombre">Nom del Prov.</label>
+            <input type="text" id="prov-nombre" name="nombre" required maxlength="100" autocomplete="off">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="prov-telefono">Teléfono.</label>
+            <input type="text" id="prov-telefono" name="telefono" maxlength="20" autocomplete="off">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="prov-localidad">Localidad.</label>
+            <input type="text" id="prov-localidad" name="localidad" maxlength="100" autocomplete="off">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="prov-num-cliente">Num Cliente.</label>
+            <input type="text" id="prov-num-cliente" name="num_cliente" maxlength="50" autocomplete="off">
+        </div>
+
+        <div class="acciones-modal">
+            <button type="button" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
+            <button type="submit" id="btn-guardar" class="btn-confirmar">Confirmar</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proveedores</title>
+    <link rel="stylesheet" href="styles/Prov.css">
+    <link rel="stylesheet" href="styles/NuEdProv.css">
+</head>
+<body>
+    <main class="contenedor-principal">
+        <h2 class="titulo-modulo">Proveedores</h2>
+
+        <section class="cartProveedores">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre del Proveedor</th>
+                        <th>Telefono</th>
+                        <th>Localidad</th>
+                        <th>Num de Cliente.</th>
+                        <th class="col-accion-header">
+                            <button type="button" id="btn-agregar" class="btn-agregar">+</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="lista-proveedores">
+                    <!-- Fila de ejemplo -->
+                    <tr>
+                        <td>Silicon Valley</td>
+                        <td>123456789</td>
+                        <td>Lomas de Mart</td>
+                        <td>XXXXXXXXX</td>
+                        <td class="col-acciones">
+                            <button type="button" class="btn-editar" title="Editar">✏️</button>
+                            <button type="button" class="btn-eliminar" title="Eliminar">🗑️</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="aviso" role="status"></div>
+        </section>
+    </main>
+
+    <!-- Modal contenedor que recibe NuEdProv -->
+    <dialog id="modal-contenedor">
+        <div id="modal-caja"></div>
+    </dialog>
+
+    <!-- Solo dejamos Prov.js que es el script que existe -->
+    <script src="scripts/Prov.js"></script>
+</body>
+</html>

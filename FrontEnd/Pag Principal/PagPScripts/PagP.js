@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Redirecciones
-        const btnCartera = document.getElementById('btn-cartera');
+        const btnCartera = document.getElementById('btn-cartera');  // Verifica que este ID coincida con el botón en PagP.html
         if (btnCartera) {
             btnCartera.addEventListener('click', () => {
                 window.location.href = '../Car Clientes/CarC.html';
@@ -443,6 +443,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnInventario) {
             btnInventario.addEventListener('click', () => {
                 window.location.href = '../Inventario/Inv.html';
+            });
+        }
+
+        const btnProveedores = document.getElementById('btn-proveedores');
+
+        if (btnProveedores) {
+            btnProveedores.addEventListener('click', () => {
+                window.location.href = '../Proveedores/Prov.html';
             });
         }
 

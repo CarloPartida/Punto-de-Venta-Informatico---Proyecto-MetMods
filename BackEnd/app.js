@@ -7,6 +7,7 @@ const loginRoutes = require('./Routes/loginRouter');
 const pagpRouter = require('./Routes/pagpRouter');
 const carcRouter = require('./Routes/carcRouter');
 const invRouter = require('./Routes/invRouter');
+const provRouter = require('./Routes/provRouter');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(loginRoutes);
 app.use('/api/servicios', pagpRouter);
 app.use('/api/clientes', carcRouter);
 app.use('/api/productos', invRouter);
+app.use('/api/proveedores', provRouter);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../FrontEnd/Login/Login.html'));

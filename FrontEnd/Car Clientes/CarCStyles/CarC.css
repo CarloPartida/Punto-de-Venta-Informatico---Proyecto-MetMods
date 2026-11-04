@@ -1,7 +1,7 @@
 :root {
-  --principal: #2D3535;
-  --secundario: #E5EFEA;
-  --complementario: #4CA0A0;
+    --principal: #2D3535;
+    --secundario: #E5EFEA;
+    --complementario: #4CA0A0;
 }
 
 * {
@@ -21,13 +21,72 @@ main.contenedor-principal {
 }
 
 .titulo-modulo {
-    margin: 0 0 8px 4px;
+    margin: 8px 0 8px 4px;
     font-size: clamp(0.95rem, 2.5vw, 1.2rem);
     font-weight: bold;
     color: var(--principal);
 }
 
-/* Caja Turquesa */
+/* ==========================================
+   Barra de Navegación Móvil / Tableta
+   ========================================== */
+
+/* Oculta en pantallas de escritorio */
+.nav-movil {
+    display: none;
+}
+
+/* Visible en celulares y tabletas (<= 1024px) */
+@media screen and (max-width: 1024px) {
+    .nav-movil {
+        display: flex;
+        width: 100%;
+        overflow-x: auto; /* Permite deslizar horizontalmente con el dedo/mouse */
+        white-space: nowrap;
+        margin-bottom: 10px;
+        border: 1px solid var(--principal);
+        border-radius: 6px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Ocultar la barra de desplazamiento visual para un acabado más limpio */
+    .nav-movil::-webkit-scrollbar {
+        display: none;
+    }
+    .nav-movil {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .btn-nav {
+        flex: 1 0 auto; /* Permite que cada botón se ajuste a su texto */
+        min-width: 72px;
+        padding: 8px 6px;
+        text-align: center;
+        text-decoration: none;
+        font-size: clamp(0.6rem, 2vw, 0.75rem); /* Tamaño de fuente adaptable */
+        font-weight: 500;
+        color: var(--principal);
+        background-color: var(--secundario);
+        border-right: 1px solid var(--principal);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-nav:last-child {
+        border-right: none;
+    }
+
+    /* Pestaña del módulo activo actual */
+    .btn-nav.activo {
+        background-color: var(--complementario);
+        color: #ffffff;
+        font-weight: bold;
+    }
+}
+
 section.cartClientes, div.cartClientes {
     background-color: var(--complementario);
     border: 2px solid var(--principal);

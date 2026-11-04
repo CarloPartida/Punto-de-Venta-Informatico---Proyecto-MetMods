@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proveedores</title>
     <link rel="stylesheet" href="styles/Prov.css">
-    <link rel="stylesheet" href="styles/NuEdProv.css">
 </head>
 <body>
     <main class="contenedor-principal">
         <h2 class="titulo-modulo">Proveedores</h2>
+
+        <!-- Barra de navegación para móvil/tableta -->
+        <nav class="nav-movil">
+            <a href="../Pag Principal/PagP.html" class="btn-nav">Página Principal</a>
+            <a href="../Inventario/Inv.html" class="btn-nav">Inventario</a>
+            <a href="Prov.html" class="btn-nav activo">Proveedores</a>
+            <a href="../Car Clientes/CarC.html" class="btn-nav">Cartera de clientes</a>
+            <a href="#" class="btn-nav">Soporte</a>
+        </nav>
 
         <section class="cartProveedores">
             <table>
@@ -24,19 +32,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="lista-proveedores">
-                    <!-- Fila de ejemplo -->
-                    <tr>
-                        <td>Silicon Valley</td>
-                        <td>123456789</td>
-                        <td>Lomas de Mart</td>
-                        <td>XXXXXXXXX</td>
-                        <td class="col-acciones">
-                            <button type="button" class="btn-editar" title="Editar">✏️</button>
-                            <button type="button" class="btn-eliminar" title="Eliminar">🗑️</button>
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody id="lista-proveedores"></tbody>
             </table>
             <div id="aviso" role="status"></div>
         </section>
@@ -47,7 +43,7 @@
         <div id="modal-caja"></div>
     </dialog>
 
-    <!-- Solo dejamos Prov.js que es el script que existe -->
+    <script src="scripts/NuEdProv.js"></script>
     <script src="scripts/Prov.js"></script>
 </body>
 </html>

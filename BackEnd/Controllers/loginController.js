@@ -20,7 +20,7 @@ async function iniciarSesion(req, res) {
             return res.status(401).send('Usuario o contraseña incorrectos');
         }
 
-        // 1. Verificar si el usuario está actualmente bloqueado
+        // Verificar si el usuario está actualmente bloqueado
         const ahora = new Date();
         if (usuario.bloqueado_hasta && new Date(usuario.bloqueado_hasta) > ahora) {
             const tiempoRestanteMs = new Date(usuario.bloqueado_hasta) - ahora;
@@ -29,7 +29,7 @@ async function iniciarSesion(req, res) {
             return res.status(429).send(`Cuenta bloqueada por seguridad. Intenta de nuevo en ${minutosRestantes} minuto(s).`);
         }
 
-        // 2. Validar contraseña
+        // Validar contraseña
         const esValida = await bcrypt.compare(password, usuario.Contrasena);
 
         if (!esValida) {
@@ -51,6 +51,9 @@ async function iniciarSesion(req, res) {
 
         // Cuando el login es correcto se resetean los contadores
         await loginModel.resetearIntentos(usuario.ID_Sesion);
+
+        // Se crea la cookie de sesión nativa en la respuesta HTTP
+        res.setHeader('Set-Cookie', 'sesion_activa=true; Path=/; HttpOnly; SameSite=Lax');
 
         res.redirect('/Pag Principal/PagP.html'); 
     } catch (error) {

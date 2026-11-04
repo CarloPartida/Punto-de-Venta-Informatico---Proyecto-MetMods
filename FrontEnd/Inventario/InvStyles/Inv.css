@@ -159,7 +159,7 @@ tbody tr:focus {
     }
 }
 
-/* Disponibilidad con botones - y + (RQF 13, RQNF 17) */
+/* Disponibilidad con botones - y + */
 td.celda-disponibilidad {
     white-space: nowrap;
 }
@@ -195,4 +195,83 @@ td.celda-disponibilidad {
 .btn-cant:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+}
+
+.nav-movil {
+    display: none;
+}
+
+/* Mostrar únicamente en pantallas de Celular y Tableta */
+@media screen and (max-width: 1024px) {
+    .nav-movil {
+        display: flex;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        margin-bottom: 10px;
+        border: 1px solid var(--principal, #2D3535);
+        border-radius: 6px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Ocultar barra de desplazamiento visual */
+    .nav-movil::-webkit-scrollbar {
+        display: none;
+    }
+    .nav-movil {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .btn-nav {
+        flex: 1 0 auto;
+        min-width: 72px;
+        padding: 8px 6px;
+        text-align: center;
+        text-decoration: none;
+        font-size: clamp(0.6rem, 2vw, 0.75rem);
+        font-weight: 500;
+        color: var(--principal, #2D3535);
+        background-color: var(--secundario, #E5EFEA);
+        border-right: 1px solid var(--principal, #2D3535);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-nav:last-child {
+        border-right: none;
+    }
+
+    /* Estilo para el módulo activo */
+    .btn-nav.activo {
+        background-color: var(--complementario, #4CA0A0);
+        color: #ffffff;
+        font-weight: bold;
+    }
+}
+
+section.cartInventario, .cartInventario {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+section.cartInventario table, .cartInventario table {
+    min-width: 500px;
+    table-layout: fixed;
+}
+
+section.cartInventario th, 
+section.cartInventario td {
+    font-size: clamp(0.65rem, 2vw, 0.78rem);
+    padding: 4px 2px;
+    word-break: normal;
+    white-space: normal;
+}
+
+section.cartInventario td:nth-child(3),
+section.cartInventario td:nth-child(5),
+section.cartInventario td:nth-child(6) {
+    white-space: nowrap;
 }

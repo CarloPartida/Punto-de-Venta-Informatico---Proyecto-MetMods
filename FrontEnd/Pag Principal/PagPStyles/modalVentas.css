@@ -1,0 +1,57 @@
+/* Contenedor del Modal */
+#panel-venta {
+    display: none;
+    background-color: #E5EFEA;
+}
+
+/* Estilos de la Tabla de Ventas */
+table.tabla-ventas {
+    width: 100%;
+    border: 1px solid black; 
+    border-collapse: separate;
+    border-radius: 5px;
+}
+
+table.tabla-ventas th,
+table.tabla-ventas td,
+table.tabla-ventas tr {
+    border: 1px solid black;
+}
+
+table.tabla-ventas th {
+    background-color: #4CA0A0;
+}
+
+/* Estilos de botones */
+button {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    box-sizing: border-box;
+    font-size: clamp(12px, 2.5vw, 30px);
+    border-radius: 30px;
+    background-color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2D3535;
+    color: #E5EFEA;
+}
+
+/* Color especial para el botón Guardar */
+#btn-guardar {
+    background-color: #4CA0A0;
+}
+
+/* Espaciado del total */
+.campo-total {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Tabla de los botones de acción */
+table.tabla-acciones-venta {
+    width: 100%;
+    margin-top: 10px;
+}

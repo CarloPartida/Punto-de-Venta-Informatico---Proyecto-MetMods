@@ -1,0 +1,39 @@
+/* Estilos extraídos de modalServicios.html */
+#panel-servicio {
+    background-color: #E5EFEA;
+}
+
+.grupo-cliente {
+    margin-top: 10px;
+}
+
+.leyenda-cliente {
+    background-color: #4CA0A0;
+    text-align: center;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#panel-servicio input[type="text"],
+#panel-servicio input[type="password"],
+#panel-servicio input[type="number"],
+#panel-servicio input[type="tel"] {
+    width: 100%;
+    padding: 8px 2px;
+    font: inherit;
+    color: var(--principal, #2D3535);
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--principal, #2D3535);
+    border-radius: 0;
+}
+
+#panel-servicio input[type="text"]:focus,
+#panel-servicio input[type="password"]:focus,
+#panel-servicio input[type="number"]:focus,
+#panel-servicio input[type="tel"]:focus {
+    outline: none;
+    border-bottom-color: var(--complementario, #4CA0A0);
+    box-shadow: 0 2px 0 0 var(--complementario, #4CA0A0);
+}

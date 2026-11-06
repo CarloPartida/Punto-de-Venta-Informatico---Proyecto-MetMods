@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soporte</title>
+</head>
+<body>
+
+    <header>
+        <h1>Soporte</h1>
+    </header>
+
+    <main>
+        <section>
+            <button id="btn-nuevo-soporte" type="button">+</button>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>No. del Soporte</th>
+                        <th>Nombre</th>
+                        <th>Edad</th>
+                        <th>Telefono</th>
+                        <th>Localidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-soporte">
+                    <tr>
+                        <td>1</td>
+                        <td>Candence</td>
+                        <td>67</td>
+                        <td>123456789</td>
+                        <td>Lomas de Mart</td>
+                        <td>
+                            <button type="button" class="btn-editar">✏️</button>
+                            <button type="button" class="btn-eliminar">🗑️</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Contenedor dinámico del modal -->
+        <div id="modal-caja"></div>
+    </main>
+
+    <script src="scripts/NuEdSp.js"></script>
+</body>
+</html>

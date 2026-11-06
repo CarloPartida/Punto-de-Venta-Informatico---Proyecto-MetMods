@@ -1,0 +1,33 @@
+<dialog id="dialog-soporte">
+    <header>
+        <h3>Nuevo / Editar Soporte</h3>
+        <p>Registra un nuevo o edita un Soporte</p>
+    </header>
+
+    <form id="form-soporte" action="/api/soporte" method="POST">
+        <div>
+            <label for="soporte-nombre">Nombre.</label>
+            <input type="text" id="soporte-nombre" name="nombre" required>
+        </div>
+
+        <div>
+            <label for="soporte-edad">Edad.</label>
+            <input type="number" id="soporte-edad" name="edad">
+        </div>
+
+        <div>
+            <label for="soporte-telefono">Teléfono.</label>
+            <input type="tel" id="soporte-telefono" name="telefono">
+        </div>
+
+        <div>
+            <label for="soporte-localidad">Localidad.</label>
+            <input type="text" id="soporte-localidad" name="localidad">
+        </div>
+
+        <div>
+            <button type="button" id="btn-deshacer">Deshacer</button>
+            <button type="submit" id="btn-confirmar">Confirmar</button>
+        </div>
+    </form>
+</dialog>

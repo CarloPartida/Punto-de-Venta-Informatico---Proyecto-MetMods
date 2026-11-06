@@ -140,4 +140,13 @@ async function listarProductos(req, res) {
     }
 }
 
-module.exports = { listarPendientes, obtener, crear, actualizar, finalizar, listarProductos };
+// Retorna la cartera de clientes
+async function listarClientes(req, res) {
+    try {
+        res.json(await pagpModel.listarClientes());
+    } catch (error) {
+        responderError(res, error);
+    }
+}
+
+module.exports = { listarPendientes, obtener, crear, actualizar, finalizar, listarProductos, listarClientes };

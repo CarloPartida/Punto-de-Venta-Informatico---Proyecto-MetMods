@@ -6,6 +6,8 @@
     <title>Página Principal</title>
     <link rel="stylesheet" href="PagPStyles/PagP.css">
     <link rel="stylesheet" href="PagPStyles/Perfil.css">
+    <link rel="stylesheet" href="PagPStyles/modalServicios.css">
+    <link rel="stylesheet" href="PagPStyles/modalVentas.css">
 </head>
 <body>
 
@@ -50,7 +52,7 @@
                             <h2>Servicios Pendientes.</h2>
                         </td>
                     </tr>
-                    <tr style="border-collapse: separate; border: 1px solid black;">
+                    <tr>
                         <td><h2>ID</h2></td>
                         <td><h2>Nombre</h2></td>
                         <td><h2>Equipo</h2></td>
@@ -58,11 +60,11 @@
                         <td colspan="2"><h2>Acciones</h2></td>
                     </tr>
                 </thead>
-                <!-- Contenedor dinámico donde JS renderizará los registros de MySQL -->
+                <!-- Contenedor dinámico de servicios -->
                 <tbody id="lista-servicios"></tbody>
             </table>
-            <!-- Mensaje de estado en caso de no haber registros o error -->
-            <div id="aviso" style="text-align: center; margin-top: 10px; font-weight: bold;"></div>
+            <!-- Mensaje de estado -->
+            <div id="aviso"></div>
         </section>
     </main>
 
@@ -70,6 +72,11 @@
         <div class="modal-caja" id="modal-caja"></div>
     </dialog>
 
+    <!-- Inclusión de scripts -->
+    <script src="PagPScripts/facturaPDF.js"></script>
+    <script src="PagPScripts/modalVentas.js"></script>
+    <script src="PagPScripts/modalServicios.js"></script>
+    <script src="PagPScripts/Perfil.js"></script>
     <script src="PagPScripts/PagP.js"></script>
 </body>
 </html>

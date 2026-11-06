@@ -6,7 +6,7 @@
 
     <p id="mensaje-error-modal" class="mensaje-error" hidden></p>
 
-    <form id="form-producto">
+    <form id="form-producto" action="/api/productos" method="POST">
         <div class="campo-grupo">
             <label for="prod-nombre">Producto.</label>
             <input type="text" id="prod-nombre" name="nombre" required maxlength="100" autocomplete="off">

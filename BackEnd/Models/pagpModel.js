@@ -4,13 +4,13 @@ const invModel = require('./invModel');
 // Busca un cliente por nombre y teléfono o lo crea si no existe
 async function resolverCliente(db, { nombre, edad, telefono }) {
     const [existentes] = await db.execute(
-        'SELECT ID_Cliente FROM Cartera_Cliente WHERE Nombre = ? AND Telefono <=> ? LIMIT 1',
+        'SELECT ID_Cliente FROM cartera_cliente WHERE Nombre = ? AND Telefono <=> ? LIMIT 1',
         [nombre, telefono]
     );
     if (existentes[0]) return existentes[0].ID_Cliente;
 
     const [resultado] = await db.execute(
-        'INSERT INTO Cartera_Cliente (Nombre, Edad, Telefono) VALUES (?, ?, ?)',
+        'INSERT INTO cartera_cliente (Nombre, Edad, Telefono) VALUES (?, ?, ?)',
         [nombre, edad, telefono]
     );
     return resultado.insertId;
@@ -51,7 +51,7 @@ async function listarPendientes() {
         const [filas] = await db.execute(`
             SELECT s.ID_Servicio, c.Nombre, s.Equipo, DATE_FORMAT(s.Fecha, '%d/%m/%Y') AS Fecha
             FROM Servicio s
-            JOIN Cartera_Cliente c ON c.ID_Cliente = s.ID_Cliente
+            JOIN cartera_cliente c ON c.ID_Cliente = s.ID_Cliente
             WHERE s.Estado = 'Pendiente'
             ORDER BY s.Fecha DESC, s.ID_Servicio DESC
         `);
@@ -70,7 +70,7 @@ async function obtenerPorId(id) {
                    s.Costo_Total, s.Estado,
                    c.Nombre AS cliente_nombre, c.Edad AS cliente_edad, c.Telefono AS cliente_telefono
             FROM Servicio s
-            JOIN Cartera_Cliente c ON c.ID_Cliente = s.ID_Cliente
+            JOIN cartera_cliente c ON c.ID_Cliente = s.ID_Cliente
             WHERE s.ID_Servicio = ?
         `, [id]);
         if (!servicios[0]) return null;
@@ -160,7 +160,7 @@ async function actualizar(id, datos) {
     }
 }
 
-// Marca el estado de un servicio como Finalizado (RQF 4)
+// Marca el estado de un servicio como Finalizado
 async function finalizar(id) {
     const db = await conexion();
     try {
@@ -185,4 +185,15 @@ async function listarProductos() {
     }
 }
 
-module.exports = { listarPendientes, obtenerPorId, crear, actualizar, finalizar, listarProductos };
+// Obtiene la lista de clientes para el autocompletado del modal desde cartera_cliente
+async function listarClientes() {
+    const db = await conexion();
+    try {
+        const [filas] = await db.execute('SELECT Nombre, Edad, Telefono FROM cartera_cliente ORDER BY Nombre');
+        return filas;
+    } finally {
+        await db.end();
+    }
+}
+
+module.exports = { listarPendientes, obtenerPorId, crear, actualizar, finalizar, listarProductos, listarClientes };

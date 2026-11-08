@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Soporte</title>
+    <link rel="stylesheet" href="styles/Slop.css">
+    <link rel="stylesheet" href="styles/NuEdSp.css">
 </head>
 <body>
 
-    <header>
-        <h1>Soporte</h1>
-    </header>
+    <main class="contenedor-principal">
+        <h2 class="titulo-modulo">Soporte</h2>
 
-    <main>
+        <nav class="nav-movil">
+            <a href="../Pag Principal/PagP.html" class="btn-nav">Página Principal</a>
+            <a href="CarC.html" class="btn-nav activo">Cartera de clientes</a>
+            <a href="../Inventario/Inv.html" class="btn-nav">Inventario</a>
+            <a href="../Proveedores/Prov.html" class="btn-nav">Proveedores</a>
+            <a href="../Soporte/Soporte.html" class="btn-nav">Soporte</a>
+        </nav>
+
         <section>
-            <button id="btn-nuevo-soporte" type="button">+</button>
-            
             <table>
                 <thead>
                     <tr>
@@ -23,8 +29,12 @@
                         <th>Telefono</th>
                         <th>Localidad</th>
                         <th>Acciones</th>
+                        <th class="col-accion-header">
+                            <button type="button" id="btn-agregar" class="btn-agregar">+</button>
+                        </th>
                     </tr>
                 </thead>
+                <!-- TABLA DE SOPORTE, duda de implentacion, ¿Que hace este pibe aqui?, Referencia a tablas de .html anteriores donde no esta, esta tabla.
                 <tbody id="tabla-soporte">
                     <tr>
                         <td>1</td>
@@ -38,12 +48,17 @@
                         </td>
                     </tr>
                 </tbody>
+                -->
+                <tbody id="lista-clientes"></tbody>
             </table>
+            <div id="aviso"></div>
         </section>
+    </main>
 
+    <dialog>
         <!-- Contenedor dinámico del modal -->
         <div id="modal-caja"></div>
-    </main>
+    </dialog>
 
     <script src="scripts/NuEdSp.js"></script>
 </body>

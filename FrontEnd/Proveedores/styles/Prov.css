@@ -12,8 +12,11 @@ body {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
-body h1 {
-    text-align: center;
+.titulo-modulo {
+    margin: 8px 0 8px 4px;
+    font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+    font-weight: bold;
+    color: var(--principal);
 }
 
 main {
@@ -48,6 +51,12 @@ table td {
     vertical-align: middle;
 }
 
+th.col-accion-header {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
 button {
     width: 45%;
     padding: 6px 12px;
@@ -64,24 +73,38 @@ button:hover {
     color: white;
 }
 
-@media screen and (max-width: 768px) {
-    button {
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 368px) {
-    table {
-        font-size: 3.6vw;
-    }
-}
-
 /* Navegación móvil */
 .nav-movil {
     display: none;
 }
 
-@media screen and (max-width: 1024px) {
+
+section.cartInventario, .cartInventario {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+section.cartInventario table, .cartInventario table {
+    min-width: 500px;
+    table-layout: fixed;
+}
+
+section.cartInventario th, 
+section.cartInventario td {
+    font-size: clamp(0.65rem, 2vw, 0.78rem);
+    padding: 4px 2px;
+    word-break: normal;
+    white-space: normal;
+}
+
+section.cartInventario td:nth-child(3),
+section.cartInventario td:nth-child(5),
+section.cartInventario td:nth-child(6) {
+    white-space: nowrap;
+}
+
+/* Mostrar únicamente en pantallas de Celular y Tableta */
+@media screen and (max-width: 768px) {
     .nav-movil {
         display: flex;
         width: 100%;
@@ -93,12 +116,17 @@ button:hover {
         -webkit-overflow-scrolling: touch;
     }
 
+    /* Ocultar barra de desplazamiento visual */
     .nav-movil::-webkit-scrollbar {
         display: none;
     }
     .nav-movil {
         -ms-overflow-style: none;
         scrollbar-width: none;
+    }
+
+    button {
+        width: 100%;
     }
 
     .btn-nav {
@@ -122,9 +150,22 @@ button:hover {
         border-right: none;
     }
 
+    /* Estilo para el módulo activo */
     .btn-nav.activo {
         background-color: var(--complementario, #4CA0A0);
         color: #ffffff;
         font-weight: bold;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    table {
+        font-size: 3.6vw;
+    }
+}
+
+@media screen and (max-width: 321px) {
+    table {
+        font-size: 3.2vw;
     }
 }

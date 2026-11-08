@@ -15,12 +15,19 @@ body {
     background-color: #ffffff;
 }
 
+.titulo-modulo {
+    margin: 8px 0 8px 4px;
+    font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+    font-weight: bold;
+    color: var(--principal);
+}
+
 main.contenedor-principal{
-    background-color: #4CA0A0;
+    background-color: var(--complementario);
     border: 2px solid black;
-    border-radius: 5px;
+    border-radius: 10px;
     width: 100%;
-    max-width: 100%;
+    padding: 10px;
 }
 
 table {
@@ -140,25 +147,6 @@ tbody tr:focus {
     font-size: clamp(0.75rem, 1.5vw, 0.95rem);
 }
 
-/* Optimización extra para celulares angostos */
-@media screen and (max-width: 480px) {
-    body {
-        padding: 4px;
-    }
-    section.cartClientes, div.cartClientes {
-        padding: 4px;
-    }
-    table {
-        border-spacing: 2px 4px;
-    }
-    th, td {
-        padding: 4px 1px;
-    }
-    .btn-editar, .btn-eliminar {
-        margin: 0;
-    }
-}
-
 /* Disponibilidad con botones - y + */
 td.celda-disponibilidad {
     white-space: nowrap;
@@ -201,8 +189,32 @@ td.celda-disponibilidad {
     display: none;
 }
 
+section.cartInventario, .cartInventario {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+section.cartInventario table, .cartInventario table {
+    min-width: 500px;
+    table-layout: fixed;
+}
+
+section.cartInventario th, 
+section.cartInventario td {
+    font-size: clamp(0.65rem, 2vw, 0.78rem);
+    padding: 4px 2px;
+    word-break: normal;
+    white-space: normal;
+}
+
+section.cartInventario td:nth-child(3),
+section.cartInventario td:nth-child(5),
+section.cartInventario td:nth-child(6) {
+    white-space: nowrap;
+}
+
 /* Mostrar únicamente en pantallas de Celular y Tableta */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
     .nav-movil {
         display: flex;
         width: 100%;
@@ -252,26 +264,21 @@ td.celda-disponibilidad {
     }
 }
 
-section.cartInventario, .cartInventario {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-section.cartInventario table, .cartInventario table {
-    min-width: 500px;
-    table-layout: fixed;
-}
-
-section.cartInventario th, 
-section.cartInventario td {
-    font-size: clamp(0.65rem, 2vw, 0.78rem);
-    padding: 4px 2px;
-    word-break: normal;
-    white-space: normal;
-}
-
-section.cartInventario td:nth-child(3),
-section.cartInventario td:nth-child(5),
-section.cartInventario td:nth-child(6) {
-    white-space: nowrap;
+/* Optimización extra para celulares angostos */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 4px;
+    }
+    section.cartClientes, div.cartClientes {
+        padding: 4px;
+    }
+    table {
+        border-spacing: 2px 4px;
+    }
+    th, td {
+        padding: 4px 1px;
+    }
+    .btn-editar, .btn-eliminar {
+        margin: 0;
+    }
 }

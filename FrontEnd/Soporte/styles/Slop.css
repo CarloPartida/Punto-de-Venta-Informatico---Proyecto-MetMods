@@ -189,27 +189,27 @@ td.celda-disponibilidad {
     display: none;
 }
 
-section.cartInventario, .cartInventario {
+section.cartSoporte, .cartSoporte {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
 
-section.cartInventario table, .cartInventario table {
+section.cartSoporte table, .cartSoporte table {
     min-width: 500px;
     table-layout: fixed;
 }
 
-section.cartInventario th, 
-section.cartInventario td {
+section.cartSoporte th, 
+section.cartSoporte td {
     font-size: clamp(0.65rem, 2vw, 0.78rem);
     padding: 4px 2px;
     word-break: normal;
     white-space: normal;
 }
 
-section.cartInventario td:nth-child(3),
-section.cartInventario td:nth-child(5),
-section.cartInventario td:nth-child(6) {
+section.cartSoporte td:nth-child(3),
+section.cartSoporte td:nth-child(5),
+section.cartSoporte td:nth-child(6) {
     white-space: nowrap;
 }
 

@@ -121,19 +121,26 @@ const ModalServicios = (() => {
                 if (el) el.value = valor ?? '';
             };
 
-            poner('equipo', servicio.Equipo);
-            poner('descripcion', servicio.Descripcion);
-            poner('observaciones', servicio.Observaciones);
-            poner('cliente-nombre', servicio.cliente_nombre);
-            poner('cliente-edad', servicio.cliente_edad);
-            poner('cliente-telefono', servicio.cliente_telefono);
+            poner('equipo', servicio.equipo ?? servicio.Equipo);
+            poner('descripcion', servicio.descripcion ?? servicio.Descripcion);
+            poner('observaciones', servicio.observaciones ?? servicio.Observaciones);
 
+            const nombreCli = servicio.cliente?.nombre ?? servicio.cliente_nombre ?? servicio.Cliente_Nombre;
+            const edadCli = servicio.cliente?.edad ?? servicio.cliente_edad ?? servicio.Cliente_Edad;
+            const telCli = servicio.cliente?.telefono ?? servicio.cliente_telefono ?? servicio.Cliente_Telefono;
+
+            poner('cliente-nombre', nombreCli);
+            poner('cliente-edad', edadCli);
+            poner('cliente-telefono', telCli);
+
+            ModalVentas.limpiar();
             ModalVentas.rellenar(servicio);
 
+            const idServicio = servicio.id ?? servicio.ID_Servicio ?? id;
             const tituloModal = document.querySelector('#modal-caja h3, #panel-servicio h3');
-            if (tituloModal) tituloModal.textContent = `Editar servicio #${servicio.ID_Servicio}`;
+            if (tituloModal) tituloModal.textContent = `Editar servicio #${idServicio}`;
 
-            servicioEditando = servicio.ID_Servicio;
+            servicioEditando = idServicio;
             abrir();
         } catch (err) {
             alert(err.message);

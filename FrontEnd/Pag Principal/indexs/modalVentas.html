@@ -1,5 +1,5 @@
 <!-- Panel de la tabla de productos y total -->
-<div id="panel-venta" class="panel-modal">
+<div id="panel-venta" class="panel-modal" hidden>
     <table class="tabla-ventas">
         <thead>
             <tr>
@@ -12,7 +12,7 @@
         <tbody id="tabla-ventas-body">
             <!-- Fila 1 -->
             <tr>
-                <td><input type="text" placeholder="Producto" class="input-prod"></td>
+                <td><input type="text" placeholder="Producto" class="input-prod" list="lista-productos"></td>
                 <td><input type="text" placeholder="$0 MXN" class="input-precio"></td>
                 <td><span class="cant-piezas">0</span></td>
                 <td class="col-botones">
@@ -22,7 +22,7 @@
             </tr>
             <!-- Fila 2 -->
             <tr>
-                <td><input type="text" placeholder="Producto" class="input-prod"></td>
+                <td><input type="text" placeholder="Producto" class="input-prod" list="lista-productos"></td>
                 <td><input type="text" placeholder="$0 MXN" class="input-precio"></td>
                 <td><span class="cant-piezas">0</span></td>
                 <td class="col-botones">
@@ -32,7 +32,7 @@
             </tr>
             <!-- Fila 3 -->
             <tr>
-                <td><input type="text" placeholder="Producto" class="input-prod"></td>
+                <td><input type="text" placeholder="Producto" class="input-prod" list="lista-productos"></td>
                 <td><input type="text" placeholder="$0 MXN" class="input-precio"></td>
                 <td><span class="cant-piezas">0</span></td>
                 <td class="col-botones">
@@ -45,7 +45,7 @@
 
     <div class="campo-total">
         <label for="costo-total">Costo Total.</label>
-        <input type="text" id="costo-total" readonly placeholder="$0.00">
+        <input type="text" id="costo-total" placeholder="$0.00">
     </div>
 </div>
 

@@ -11,6 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Muestra un mensaje de estado debajo de la tabla
     const avisar = (texto) => { if (aviso) aviso.textContent = texto; };
 
+    // Function helper para censurar los 4 dígitos centrales (RQNF 23)
+    function enmascararTelefono(telefono) {
+        if (!telefono) return '';
+        const digitos = String(telefono).replace(/\D/g, '');
+        if (digitos.length === 10) {
+            return `${digitos.substring(0, 2)} **** ${digitos.substring(6)}`;
+        }
+        return String(telefono).replace(/^(\d{2}\s*)\d{4}/, '$1****');
+    }
+
     // Realiza peticiones HTTP centralizadas
     async function pedir(url, opciones = {}) {
         const respuesta = await fetch(url, {
@@ -61,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             crearCelda(tecnico.ID_Soporte),
             crearCelda(tecnico.Nombre),
             crearCelda(tecnico.Edad),
-            crearCelda(tecnico.Telefono),
+            crearCelda(enmascararTelefono(tecnico.Telefono)), // Se aplica la censura al renderizar
             crearCelda(tecnico.Localidad),
             acciones
         );
@@ -133,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (boton.dataset.accion === 'eliminar') eliminarTecnico(fila);
         });
 
-        // Navegación con teclado entre registros (RQNF 22)
+        // Navegación con teclado entre registros
         listaSoporte.addEventListener('keydown', (e) => {
             const fila = e.target.closest('tr');
             if (!fila) return;
@@ -171,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('soporte-guardado', cargarSoporte);
 
     promesaModal = precargarModal();
-    // La promesa también se espera en los clics; evita rechazo no manejado.
     promesaModal.catch(() => {});
     cargarSoporte();
 });

@@ -1,52 +1,50 @@
 const pagpModel = require('../Models/pagpModel');
 
-// Crea errores de validación HTTP 400
 function errorDeValidacion(mensaje) {
     const error = new Error(mensaje);
     error.status = 400;
     return error;
 }
 
-// Limpia espacios e ignora cadenas vacías
 function limpiar(valor) {
     if (typeof valor !== 'string') return null;
     const texto = valor.trim();
     return texto === '' ? null : texto;
 }
 
-// Valida y convierte el parámetro ID
 function leerId(req) {
     const id = Number.parseInt(req.params.id, 10);
     if (!Number.isInteger(id) || id <= 0) throw errorDeValidacion('ID no válido');
     return id;
 }
 
-// Valida y normaliza la información enviada desde el cliente
 function leerServicio(body = {}) {
     const equipo = limpiar(body.equipo);
-    const nombre = limpiar(body.cliente?.nombre);
+    const nombre = limpiar(body.cliente?.nombre || body.cliente_nombre);
     if (!equipo || !nombre) {
         throw errorDeValidacion('El equipo y el nombre del cliente son obligatorios');
     }
 
     const descripcion = limpiar(body.descripcion);
     const observaciones = limpiar(body.observaciones);
-    const telefono = limpiar(body.cliente?.telefono);
+    const telefono = limpiar(body.cliente?.telefono || body.cliente_telefono);
     if (nombre.length > 100 || telefono?.length > 20 ||
         descripcion?.length > 255 || observaciones?.length > 255) {
         throw errorDeValidacion('Algún campo excede la longitud máxima permitida');
     }
 
-    let edad = Number.parseInt(body.cliente?.edad, 10);
+    let edad = Number.parseInt(body.cliente?.edad || body.cliente_edad, 10);
     if (Number.isNaN(edad)) edad = null;
     if (edad !== null && (edad < 0 || edad > 120)) throw errorDeValidacion('La edad no es válida');
 
-    const costoTotal = Number(body.costoTotal ?? 0);
+    const costoTotal = Number(body.costoTotal ?? body.Costo_Total ?? 0);
     if (!Number.isFinite(costoTotal) || costoTotal < 0) {
         throw errorDeValidacion('El costo total no es válido');
     }
 
-    const ventaActiva = body.ventaActiva === true;
+    const valActiva = body.ventaActiva ?? body.Venta_Activa;
+    const ventaActiva = valActiva === true || valActiva === 1 || valActiva === '1' || valActiva === 'true';
+
     const productos = [];
     if (ventaActiva && Array.isArray(body.productos)) {
         for (const fila of body.productos) {
@@ -62,20 +60,22 @@ function leerServicio(body = {}) {
     }
 
     return {
-        equipo, descripcion, observaciones,
+        equipo,
+        descripcion,
+        observaciones,
         cliente: { nombre, edad, telefono },
-        ventaActiva, costoTotal, productos
+        ventaActiva,
+        costoTotal,
+        productos
     };
 }
 
-// Envía respuestas de error según el código asignado
 function responderError(res, error) {
     if (error.status) return res.status(error.status).json({ error: error.message });
     console.error(error);
     res.status(500).json({ error: 'Error interno del servidor' });
 }
 
-// Retorna los servicios pendientes
 async function listarPendientes(req, res) {
     try {
         res.json(await pagpModel.listarPendientes());
@@ -84,7 +84,6 @@ async function listarPendientes(req, res) {
     }
 }
 
-// Retorna un servicio por su ID
 async function obtener(req, res) {
     try {
         const servicio = await pagpModel.obtenerPorId(leerId(req));
@@ -95,7 +94,6 @@ async function obtener(req, res) {
     }
 }
 
-// Crea un nuevo registro de servicio
 async function crear(req, res) {
     try {
         const id = await pagpModel.crear(leerServicio(req.body));
@@ -105,7 +103,6 @@ async function crear(req, res) {
     }
 }
 
-// Actualiza un servicio existente
 async function actualizar(req, res) {
     try {
         const actualizado = await pagpModel.actualizar(leerId(req), leerServicio(req.body));
@@ -118,7 +115,6 @@ async function actualizar(req, res) {
     }
 }
 
-// Finaliza un servicio
 async function finalizar(req, res) {
     try {
         const finalizado = await pagpModel.finalizar(leerId(req));
@@ -131,7 +127,6 @@ async function finalizar(req, res) {
     }
 }
 
-// Retorna el catálogo de productos
 async function listarProductos(req, res) {
     try {
         res.json(await pagpModel.listarProductos());
@@ -140,7 +135,6 @@ async function listarProductos(req, res) {
     }
 }
 
-// Retorna la cartera de clientes
 async function listarClientes(req, res) {
     try {
         res.json(await pagpModel.listarClientes());

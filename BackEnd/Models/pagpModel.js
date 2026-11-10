@@ -33,13 +33,13 @@ async function guardarDetalle(db, idServicio, filas) {
             throw error;
         }
 
-        // 1. Guarda el registro de la venta en el detalle del servicio
+        // Guarda el registro de la venta en el detalle del servicio
         await db.execute(
             'INSERT INTO Detalle_Venta (ID_Servicio, ID_Producto, Piezas, Precio_Unitario) VALUES (?, ?, ?, ?)',
             [idServicio, producto[0].ID_Producto, fila.piezas, fila.precio]
         );
 
-        // 2. Descuenta automáticamente el stock de la tabla Producto
+        // Descuenta automáticamente el stock de la tabla Producto
         await invModel.descontarStockPorNombre(fila.producto, fila.piezas, db);
     }
 }

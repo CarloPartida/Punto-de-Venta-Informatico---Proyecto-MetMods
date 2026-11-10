@@ -1,6 +1,6 @@
 const soporteModel = require('../Models/soporteModel');
 
-// Máximos de caracteres de cada campo de texto (RQNF 25)
+// Máximos de caracteres de cada campo de texto
 const LIMITES = [
     ['nombre', 'nombre', 100],
     ['telefono', 'teléfono', 20],
@@ -40,7 +40,7 @@ function leerTecnico(body = {}) {
 
     if (!datos.nombre) throw errorDeValidacion('El nombre del técnico es obligatorio');
 
-    // RQNF 25: mensaje claro indicando qué campo se pasó y cuál es el máximo
+    // Mensaje claro indicando qué campo se pasó y cuál es el máximo
     for (const [campo, etiqueta, maximo] of LIMITES) {
         if (datos[campo] && datos[campo].length > maximo) {
             throw errorDeValidacion(`El campo ${etiqueta} no puede tener más de ${maximo} caracteres`);

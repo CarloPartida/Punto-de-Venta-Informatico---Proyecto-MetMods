@@ -43,7 +43,7 @@ async function obtenerPorId(id) {
     }
 }
 
-// Registra un nuevo técnico (RQF 15)
+// Registra un nuevo técnico
 async function crear(datos) {
     const db = await conexion();
     try {
@@ -61,7 +61,7 @@ async function crear(datos) {
     }
 }
 
-// Actualiza un técnico existente (RQF 16). Devuelve false si no existe
+// Actualiza un técnico existente. Devuelve false si no existe
 async function actualizar(id, datos) {
     const db = await conexion();
     try {
@@ -85,14 +85,14 @@ async function actualizar(id, datos) {
     }
 }
 
-// Elimina un técnico (RQF 17). Devuelve false si no existe
+// Elimina un técnico. Devuelve false si no existe
 async function eliminar(id) {
     const db = await conexion();
     try {
         const [resultado] = await db.execute('DELETE FROM soporte WHERE ID_Soporte = ?', [id]);
         return resultado.affectedRows > 0;
     } catch (error) {
-        // 1451: si más adelante otra tabla referencia al técnico, la llave foránea lo impide
+        // Si más adelante otra tabla referencia al técnico, la llave foránea lo impide
         if (error.errno === 1451) {
             throw errorHttp('No se puede eliminar: el técnico está en uso', 409);
         }

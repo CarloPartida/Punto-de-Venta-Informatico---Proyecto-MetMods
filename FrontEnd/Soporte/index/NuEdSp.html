@@ -1,6 +1,4 @@
-<dialog id="dialog-soporte">
-    <link rel="stylesheet" href="../styles/NuEdSp.css">
-
+<div class="NueEd">
     <h3 id="modal-titulo">Nuevo / Editar Soporte</h3>
     <nav>
         <h3>Registra un nuevo o edita un Soporte</h3>
@@ -8,30 +6,30 @@
 
     <p id="mensaje-error-modal" class="mensaje-error" hidden></p>
 
-    <form id="form-soporte" action="/api/soporte" method="POST">
+    <form id="form-soporte">
         <div class="campo-grupo">
             <label for="soporte-nombre">Nombre.</label>
-            <input type="text" id="soporte-nombre" name="nombre" required>
+            <input type="text" id="soporte-nombre" name="nombre" required autocomplete="off">
         </div>
 
         <div class="campo-grupo">
             <label for="soporte-edad">Edad.</label>
-            <input type="number" id="soporte-edad" name="edad">
+            <input type="number" id="soporte-edad" name="edad" min="0" max="120">
         </div>
 
         <div class="campo-grupo">
             <label for="soporte-telefono">Teléfono.</label>
-            <input type="tel" id="soporte-telefono" name="telefono">
+            <input type="tel" id="soporte-telefono" name="telefono" autocomplete="off">
         </div>
 
         <div class="campo-grupo">
             <label for="soporte-localidad">Localidad.</label>
-            <input type="text" id="soporte-localidad" name="localidad">
+            <input type="text" id="soporte-localidad" name="localidad" autocomplete="off">
         </div>
 
-        <div class="campo-grupo">
+        <div class="acciones-modal">
             <button type="button" id="btn-deshacer" class="btn-deshacer">Deshacer</button>
             <button type="submit" id="btn-confirmar" class="btn-confirmar">Confirmar</button>
         </div>
     </form>
-</dialog>
+</div>

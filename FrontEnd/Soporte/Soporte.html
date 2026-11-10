@@ -2,6 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- RQNF 23: los teléfonos del personal no deben indexarse en buscadores -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
     <title>Soporte</title>
     <link rel="stylesheet" href="styles/Slop.css">
     <link rel="stylesheet" href="styles/NuEdSp.css">
@@ -11,12 +14,13 @@
     <main class="contenedor-principal">
         <h2 class="titulo-modulo">Soporte</h2>
 
+        <!-- Barra de navegación para móvil/tableta -->
         <nav class="nav-movil">
-            <a href="../Pag Principal/PagP.html" class="btn-nav">Página Principal</a>
-            <a href="CarC.html" class="btn-nav activo">Cartera de clientes</a>
+            <a href="../Pag%20Principal/PagP.html" class="btn-nav">Página Principal</a>
             <a href="../Inventario/Inv.html" class="btn-nav">Inventario</a>
             <a href="../Proveedores/Prov.html" class="btn-nav">Proveedores</a>
-            <a href="../Soporte/Soporte.html" class="btn-nav">Soporte</a>
+            <a href="../Car%20Clientes/CarC.html" class="btn-nav">Cartera de clientes</a>
+            <a href="Soporte.html" class="btn-nav activo">Soporte</a>
         </nav>
 
         <section class="cartSoporte">
@@ -28,38 +32,24 @@
                         <th>Edad</th>
                         <th>Telefono</th>
                         <th>Localidad</th>
-                        <th>Acciones</th>
                         <th class="col-accion-header">
                             <button type="button" id="btn-agregar" class="btn-agregar">+</button>
                         </th>
                     </tr>
                 </thead>
-                <!-- TABLA DE SOPORTE, duda de implentacion, ¿Que hace este pibe aqui?, Referencia a tablas de .html anteriores donde no esta, esta tabla.
-                <tbody id="tabla-soporte">
-                    <tr>
-                        <td>1</td>
-                        <td>Candence</td>
-                        <td>67</td>
-                        <td>123456789</td>
-                        <td>Lomas de Mart</td>
-                        <td>
-                            <button type="button" class="btn-editar">✏️</button>
-                            <button type="button" class="btn-eliminar">🗑️</button>
-                        </td>
-                    </tr>
-                </tbody>
-                -->
-                <tbody id="lista-clientes"></tbody>
+                <!-- Las filas las genera Sp.js desde la base de datos -->
+                <tbody id="lista-soporte"></tbody>
             </table>
-            <div id="aviso"></div>
+            <div id="aviso" role="status"></div>
         </section>
     </main>
 
-    <dialog>
-        <!-- Contenedor dinámico del modal -->
+    <!-- Modal contenedor que recibe NuEdSp -->
+    <dialog id="modal-contenedor">
         <div id="modal-caja"></div>
     </dialog>
 
     <script src="scripts/NuEdSp.js"></script>
+    <script src="scripts/Sp.js"></script>
 </body>
 </html>

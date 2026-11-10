@@ -21,6 +21,7 @@ const pagpRouter = require('./Routes/pagpRouter');
 const carcRouter = require('./Routes/carcRouter');
 const invRouter = require('./Routes/invRouter');
 const provRouter = require('./Routes/provRouter');
+const soporteRouter = require('./Routes/soporteRouter');
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use('/api/servicios', verificarAutenticacion, pagpRouter);
 app.use('/api/clientes', verificarAutenticacion, carcRouter);
 app.use('/api/productos', verificarAutenticacion, invRouter);
 app.use('/api/proveedores', verificarAutenticacion, provRouter);
+app.use('/api/soporte', verificarAutenticacion, soporteRouter);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../FrontEnd/Login/Login.html'));

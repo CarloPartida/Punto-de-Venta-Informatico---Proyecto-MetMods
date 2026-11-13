@@ -1,37 +1,51 @@
 <!DOCTYPE html>
-<html>
-	<head>
-	    <meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Login.</title>
-		<link rel="stylesheet" href="/Login/Login.css">
-	</head>
-	<body>
-	<main class="ticket">
-		<h1>Bienvenido</h1>
-		<p class="subtitulo">Ingresa tus datos para abrir el punto de venta.</p>
-		<form class="Login" id="loginForm" action="/login" method="POST">
-			<div>
-				<label for = "user">Nombre de Usuario</label>
-				<input type="text" id="user" name="nombre" required>
-			</div>
-			<div>
-				<label for = "pass">Contraseña</label>
-				<input type="password" id="pass" name="password" required>
-			</div>
-			<div id="btn-mostrar">
-				<button type="button" name="boton">Mostrar</button>
-			</div>
-			<div>
-				<input type="submit" value="Entrar">
-			</div>
-        </form>
-        </main>
-        <script>
-			document.querySelector('#btn-mostrar button').onclick = e => {
-				const show = pass.type === 'password';
-				pass.type = show ? 'text' : 'password';
-				e.currentTarget.textContent = show ? 'Ocultar' : 'Mostrar'; };
-		</script>
-	</body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Punto de Venta</title>
+    <!-- [TABLER] Estilos principales del framework -->
+    <link rel="stylesheet" href="../assets/css/tabler.min.css">
+</head>
+<body class="theme-dark">
+
+    <!-- [TABLER] Centra el contenido en toda la pantalla -->
+    <div class="page page-center">
+        <div class="container container-tight py-4">
+
+            <!-- [TABLER] Tarjeta principal del formulario -->
+            <div class="card card-md">
+                <div class="card-body">
+                    <h2 class="h2 text-center mb-2">Bienvenido</h2>
+                    <p class="text-secondary text-center mb-4">Ingresa tus datos para abrir el punto de venta.</p>
+
+                    <form id="loginForm" action="/login" method="POST">
+                        <div class="mb-3">
+                            <label for="user" class="form-label">Nombre de Usuario</label>
+                            <input type="text" id="user" name="nombre" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="pass" class="form-label">Contraseña</label>
+
+                            <!-- [TABLER] Une el input y el botón en una misma barra -->
+                            <div class="input-group">
+                                <input type="password" id="pass" name="password" class="form-control" required>
+                                <button type="button" id="btn-mostrar" name="boton" class="btn btn-outline-secondary">Mostrar</button>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <input type="submit" value="Entrar" class="btn btn-primary w-100">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- [TABLER] Scripts interactivos del framework -->
+    <script src="../assets/js/tabler.min.js"></script>
+    <script src="Login/Login.js"></script>
+</body>
 </html>

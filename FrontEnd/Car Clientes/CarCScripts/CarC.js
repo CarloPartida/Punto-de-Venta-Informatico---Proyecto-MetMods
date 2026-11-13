@@ -29,9 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>${cliente.Nombre ?? ''}</td>
             <td>${cliente.Telefono ?? ''}</td>
             <td>${cliente.Localidad ?? ''}</td>
-            <td class="col-acciones">
-                <button type="button" class="btn-editar" data-accion="editar" aria-label="Editar cliente">&#9998;</button>
-                <button type="button" class="btn-eliminar" data-accion="eliminar" aria-label="Eliminar cliente">&#128465;</button>
+            <td class="col-acciones text-nowrap">
+                <div class="btn-list flex-nowrap">
+                    <button type="button" class="btn btn-sm btn-icon btn-outline-warning btn-editar" data-accion="editar" aria-label="Editar cliente">&#9998;</button>
+                    <button type="button" class="btn btn-sm btn-icon btn-outline-danger btn-eliminar" data-accion="eliminar" aria-label="Eliminar cliente">&#128465;</button>
+                </div>
             </td>
         `;
         return fila;

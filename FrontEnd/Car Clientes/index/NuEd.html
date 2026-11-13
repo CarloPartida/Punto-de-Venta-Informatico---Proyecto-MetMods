@@ -1,35 +1,43 @@
-<div class="NueEd">
-    <h3 id="modal-titulo">Nuevo/Editar Cliente</h3>
-    <nav>
-        <h3>Registra un nuevo o edita un Cliente</h3>
-    </nav>
+<div>
+    <!-- [TABLER] Encabezado del modal -->
+    <div class="d-flex justify-content-between align-items-start pb-3 mb-3 border-bottom">
+        <div>
+            <h3 id="modal-titulo" class="modal-title m-0">Nuevo/Editar Cliente</h3>
+            <div class="text-secondary small">Registra un nuevo o edita un cliente</div>
+        </div>
+        <button type="button" class="btn-close" aria-label="Cerrar" onclick="window.NuEd.cerrar()"></button>
+    </div>
 
-    <p id="mensaje-error-modal" class="mensaje-error" hidden></p>
+    <!-- [TABLER] Alerta dinámica de errores -->
+    <div id="mensaje-error-modal" class="alert alert-danger" role="alert" hidden></div>
 
     <form id="form-cliente" action="/api/clientes" method="POST">
-        <div class="campo-grupo">
-            <label for="cliente-nombre">Nombre.</label>
-            <input type="text" id="cliente-nombre" name="nombre" required autocomplete="off">
+        <div class="mb-3">
+            <label for="cliente-nombre" class="form-label required">Nombre</label>
+            <input type="text" id="cliente-nombre" name="nombre" class="form-control" required autocomplete="off">
         </div>
 
-        <div class="campo-grupo">
-            <label for="cliente-edad">Edad.</label>
-            <input type="number" id="cliente-edad" name="edad" min="0" max="120">
+        <div class="row g-3 mb-3">
+            <div class="col-12 col-sm-4">
+                <label for="cliente-edad" class="form-label">Edad</label>
+                <input type="number" id="cliente-edad" name="edad" class="form-control" min="0" max="120">
+            </div>
+
+            <div class="col-12 col-sm-8">
+                <label for="cliente-telefono" class="form-label">Teléfono</label>
+                <input type="tel" id="cliente-telefono" name="telefono" class="form-control">
+            </div>
         </div>
 
-        <div class="campo-grupo">
-            <label for="cliente-telefono">Teléfono.</label>
-            <input type="tel" id="cliente-telefono" name="telefono">
+        <div class="mb-3">
+            <label for="cliente-localidad" class="form-label">Localidad</label>
+            <input type="text" id="cliente-localidad" name="localidad" class="form-control">
         </div>
 
-        <div class="campo-grupo">
-            <label for="cliente-localidad">Localidad.</label>
-            <input type="text" id="cliente-localidad" name="localidad">
-        </div>
-
-        <div class="acciones-modal">
-            <button type="button" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
-            <button type="submit" id="btn-guardar" class="btn-confirmar">Confirmar</button>
+        <!-- [TABLER] Botones de acción al pie del modal -->
+        <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+            <button type="button" id="btn-cancelar" class="btn btn-outline-secondary">Cancelar</button>
+            <button type="submit" id="btn-guardar" class="btn btn-primary">Confirmar</button>
         </div>
     </form>
 </div>

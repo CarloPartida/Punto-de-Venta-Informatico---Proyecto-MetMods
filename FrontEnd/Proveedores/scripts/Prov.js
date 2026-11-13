@@ -46,17 +46,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return boton;
     }
 
-    // Construye una fila con textContent para evitar inyecciones HTML
+// Construye una fila con textContent para evitar inyecciones HTML
     function crearFila(proveedor) {
         const fila = document.createElement('tr');
         fila.dataset.id = proveedor.ID_Proveedor;
 
         const acciones = document.createElement('td');
-        acciones.className = 'col-acciones';
-        acciones.append(
-            crearBoton('\u270F\uFE0F', 'btn-editar', 'editar', 'Editar'),
-            crearBoton('\u{1F5D1}\uFE0F', 'btn-eliminar', 'eliminar', 'Eliminar')
+        acciones.className = 'col-acciones text-nowrap';
+        const grupoAcciones = document.createElement('div');
+        grupoAcciones.className = 'btn-list flex-nowrap';
+        grupoAcciones.append(
+            crearBoton('\u270F\uFE0F', 'btn btn-sm btn-icon btn-outline-warning btn-editar', 'editar', 'Editar'),
+            crearBoton('\u{1F5D1}\uFE0F', 'btn btn-sm btn-icon btn-outline-danger btn-eliminar', 'eliminar', 'Eliminar')
         );
+        acciones.append(grupoAcciones);
 
         fila.append(
             crearCelda(proveedor.Nombre_Prov),

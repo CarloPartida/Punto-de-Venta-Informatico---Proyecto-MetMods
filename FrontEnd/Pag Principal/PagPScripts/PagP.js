@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>${s.Nombre ?? ''}</td>
             <td>${s.Equipo ?? ''}</td>
             <td>${s.Fecha ?? ''}</td>
-            <td><button type="button" class="btn-editar" data-accion="editar" aria-label="Editar">&#9998;</button></td>
-            <td><button type="button" class="btn-finalizar" data-accion="finalizar">Finalizar</button></td>
+            <td class="w-1"><button type="button" class="btn btn-sm btn-outline-warning btn-editar" data-accion="editar" aria-label="Editar">&#9998;</button></td>
+            <td class="w-1"><button type="button" class="btn btn-sm btn-outline-success btn-finalizar" data-accion="finalizar">Finalizar</button></td>
         `;
         return tr;
     }

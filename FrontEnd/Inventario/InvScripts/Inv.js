@@ -43,24 +43,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Celda de disponibilidad: [-] [+], o una etiqueta si no se inventaría
     function crearCeldaDisponibilidad(producto) {
         const celda = document.createElement('td');
-        celda.className = 'celda-disponibilidad';
+        celda.className = 'celda-disponibilidad text-nowrap';
 
         if (producto.No_Invent) {
             const etiqueta = document.createElement('span');
-            etiqueta.className = 'etiqueta-no-inv';
+            etiqueta.className = 'badge bg-secondary-lt etiqueta-no-inv';
             etiqueta.textContent = 'No inventariable';
             celda.append(etiqueta);
             return celda;
         }
 
         const cantidad = document.createElement('span');
-        cantidad.className = 'cant-disp';
+        cantidad.className = 'cant-disp mx-2 fw-bold';
         cantidad.textContent = producto.Disponibilidad;
 
         celda.append(
-            crearBoton('\u2212', 'btn-cant', 'menos', 'Quitar una pieza'),
+            crearBoton('\u2212', 'btn btn-sm btn-icon btn-outline-secondary btn-cant', 'menos', 'Quitar una pieza'),
             cantidad,
-            crearBoton('+', 'btn-cant', 'mas', 'Agregar una pieza')
+            crearBoton('+', 'btn btn-sm btn-icon btn-outline-secondary btn-cant', 'mas', 'Agregar una pieza')
         );
         return celda;
     }
@@ -73,11 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
         fila.tabIndex = -1; // se puede enfocar con las flechas
 
         const acciones = document.createElement('td');
-        acciones.className = 'col-acciones';
-        acciones.append(
-            crearBoton('\u270E', 'btn-editar', 'editar', 'Editar producto'),
-            crearBoton('\u{1F5D1}', 'btn-eliminar', 'eliminar', 'Eliminar producto')
+        acciones.className = 'col-acciones text-nowrap';
+        const grupoAcciones = document.createElement('div');
+        grupoAcciones.className = 'btn-list flex-nowrap';
+        grupoAcciones.append(
+            crearBoton('\u270E', 'btn btn-sm btn-icon btn-outline-warning btn-editar', 'editar', 'Editar producto'),
+            crearBoton('\u{1F5D1}', 'btn btn-sm btn-icon btn-outline-danger btn-eliminar', 'eliminar', 'Eliminar producto')
         );
+        acciones.append(grupoAcciones);
 
         fila.append(
             crearCelda(producto.Nombre),

@@ -1,35 +1,49 @@
-<div class="NueEd">
-    <h3 id="modal-titulo">Nuevo / Editar Soporte</h3>
-    <nav>
-        <h3>Registra un nuevo o edita un Soporte</h3>
-    </nav>
-
-    <p id="mensaje-error-modal" class="mensaje-error" hidden></p>
-
-    <form id="form-soporte">
-        <div class="campo-grupo">
-            <label for="soporte-nombre">Nombre.</label>
-            <input type="text" id="soporte-nombre" name="nombre" required autocomplete="off">
+<div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+        <!-- Encabezado del Modal -->
+        <div class="modal-header">
+            <h5 class="modal-title" id="modal-titulo">Nuevo / Editar Soporte</h5>
+            <button type="button" class="btn-close" id="btn-deshacer" aria-label="Cerrar"></button>
         </div>
 
-        <div class="campo-grupo">
-            <label for="soporte-edad">Edad.</label>
-            <input type="number" id="soporte-edad" name="edad" min="0" max="120">
-        </div>
+        <!-- Formulario -->
+        <form id="form-soporte">
+            <div class="modal-body">
+                <!-- Contenedor de mensajes de error -->
+                <div id="mensaje-error-modal" class="alert alert-danger mb-3" hidden role="alert"></div>
 
-        <div class="campo-grupo">
-            <label for="soporte-telefono">Teléfono.</label>
-            <input type="tel" id="soporte-telefono" name="telefono" autocomplete="off">
-        </div>
+                <div class="mb-3">
+                    <label for="soporte-nombre" class="form-label required">Nombre completo</label>
+                    <input type="text" id="soporte-nombre" name="nombre" class="form-control" placeholder="Ej. Juan Pérez" required maxlength="100">
+                </div>
 
-        <div class="campo-grupo">
-            <label for="soporte-localidad">Localidad.</label>
-            <input type="text" id="soporte-localidad" name="localidad" autocomplete="off">
-        </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="soporte-edad" class="form-label required">Edad</label>
+                        <input type="number" id="soporte-edad" name="edad" class="form-control" placeholder="Ej. 28" min="18" max="99" required>
+                    </div>
 
-        <div class="acciones-modal">
-            <button type="button" id="btn-deshacer" class="btn-deshacer">Deshacer</button>
-            <button type="submit" id="btn-confirmar" class="btn-confirmar">Confirmar</button>
-        </div>
-    </form>
+                    <div class="col-md-6 mb-3">
+                        <label for="soporte-telefono" class="form-label required">Teléfono</label>
+                        <input type="tel" id="soporte-telefono" name="telefono" class="form-control" placeholder="Ej. 3312345678" required maxlength="20">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="soporte-localidad" class="form-label required">Localidad</label>
+                    <input type="text" id="soporte-localidad" name="localidad" class="form-control" placeholder="Ej. Guadalajara" required maxlength="100">
+                </div>
+            </div>
+
+            <!-- Pie del Modal -->
+            <div class="modal-footer">
+                <button type="button" id="btn-deshacer" class="btn btn-link link-secondary me-auto">
+                    Cancelar
+                </button>
+                <button type="submit" id="btn-confirmar" class="btn btn-primary">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

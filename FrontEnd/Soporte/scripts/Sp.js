@@ -44,15 +44,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function crearBoton(texto, clase, accion, etiqueta) {
-        const boton = document.createElement('button');
-        boton.type = 'button';
-        boton.className = clase;
-        boton.textContent = texto;
-        boton.dataset.accion = accion;
-        boton.title = etiqueta;
-        boton.setAttribute('aria-label', etiqueta);
-        return boton;
-    }
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    
+    // Estilos de botones de Tabler para tablas
+    const claseTabler = accion === 'editar' 
+        ? 'btn btn-sm btn-outline-warning me-1' 
+        : 'btn btn-sm btn-outline-danger';
+
+    boton.className = `${claseTabler} ${clase}`;
+    boton.textContent = texto;
+    boton.dataset.accion = accion;
+    boton.title = etiqueta;
+    boton.setAttribute('aria-label', etiqueta);
+    return boton;
+}
 
     // Construye una fila con textContent (no innerHTML) para que ningún dato guardado inyecte HTML
     function crearFila(tecnico) {

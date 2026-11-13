@@ -1,53 +1,109 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow, noarchive">
-    <title>Soporte</title>
-    <link rel="stylesheet" href="styles/Soporte.css">
-    <link rel="stylesheet" href="styles/NuEdSp.css">
+    <title>Soporte - Sistema de Gestión</title>
+
+    <!-- [TABLER] Archivo CSS principal con todos los estilos, colores y componentes del framework -->
+    <link rel="stylesheet" href="../assets/css/tabler.min.css">
 </head>
-<body>
+<!-- [TABLER] Activa el tema visual oscuro oficial -->
+<body class="theme-dark">
 
-    <main class="contenedor-principal">
-        <h2 class="titulo-modulo">Soporte</h2>
+    <!-- [TABLER] Contenedor raíz que estructura toda la página -->
+    <div class="page">
 
-        <!-- Barra de navegación para móvil/tableta -->
-        <nav class="nav-movil">
-            <a href="../Pag%20Principal/PagP.html" class="btn-nav">Página Principal</a>
-            <a href="../Inventario/Inv.html" class="btn-nav">Inventario</a>
-            <a href="../Proveedores/Prov.html" class="btn-nav">Proveedores</a>
-            <a href="../Car%20Clientes/CarC.html" class="btn-nav">Cartera de clientes</a>
-            <a href="Soporte.html" class="btn-nav activo">Soporte</a>
-        </nav>
+        <!-- [TABLER] Barra de navegación superior responsiva sin navbar-light para que el ícono sea claro -->
+        <header class="navbar navbar-expand-md d-print-none mb-3">
 
-        <section class="cartSoporte">
-            <table>
-                <thead>
-                    <tr>
-                        <th>No. del Soporte</th>
-                        <th>Nombre</th>
-                        <th>Edad</th>
-                        <th>Telefono</th>
-                        <th>Localidad</th>
-                        <th class="col-accion-header">
-                            <button type="button" id="btn-agregar" class="btn-agregar">+</button>
-                        </th>
-                    </tr>
-                </thead>
-                <!-- Las filas las genera Sp.js desde la base de datos -->
-                <tbody id="lista-soporte"></tbody>
-            </table>
-            <div id="aviso" role="status"></div>
-        </section>
-    </main>
+            <!-- [TABLER] Centra el contenido y limita el ancho máximo en pantallas grandes -->
+            <div class="container-xl">
 
-    <!-- Modal contenedor que recibe NuEdSp -->
+                <!-- [TABLER] Botón hamburguesa visible solo en pantallas menores a md -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- [TABLER] Estilo para el logotipo o nombre del sistema en la barra -->
+                <h1 class="navbar-brand me-auto me-md-4">
+                    <span class="text-primary fw-bold">Sistema de Gestión</span>
+                </h1>
+
+                <!-- [TABLER] Contenedor colapsable para el menú en dispositivos móviles -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+
+                    <!-- [TABLER] Lista horizontal de enlaces de navegación -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Pag%20Principal/PagP.html">
+                                <span class="nav-link-title">Página Principal</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Inventario/Inv.html">
+                                <span class="nav-link-title">Inventario</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Proveedores/Prov.html">
+                                <span class="nav-link-title">Proveedores</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Car%20Clientes/CarC.html">
+                                <span class="nav-link-title">Cartera de clientes</span>
+                            </a>
+                        </li>
+                        <li class="nav-item active fw-bold">
+                            <a class="nav-link" href="Soporte.html">
+                                <span class="nav-link-title">Soporte</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- [TABLER] Contenedor principal del cuerpo de la vista (debajo del navbar) -->
+        <div class="page-wrapper">
+            <div class="container-xl">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">Personal de Soporte</h3>
+                        <button type="button" id="btn-agregar" class="btn btn-primary">
+                            + Agregar
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-vcenter card-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No. Soporte</th>
+                                    <th>Nombre</th>
+                                    <th>Edad</th>
+                                    <th>Teléfono</th>
+                                    <th>Localidad</th>
+                                    <th class="w-1 text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lista-soporte"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="aviso" class="mt-2 text-muted" role="status"></div>
+            </div>
+        </div>
+    </div>
+
     <dialog id="modal-contenedor">
         <div id="modal-caja"></div>
     </dialog>
 
+    <!-- [TABLER] Archivo JS de Tabler para interactividad de componentes (menús colapsables, dropdowns, etc.) -->
+    <script src="../assets/js/tabler.min.js"></script>
     <script src="scripts/NuEdSp.js"></script>
     <script src="scripts/Sp.js"></script>
 </body>

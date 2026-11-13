@@ -1,37 +1,43 @@
-<div class="NueEd">
-    <link rel="stylesheet" href="styles/NuEdProv.css">
+<div>
+    <!-- [TABLER] Encabezado del modal -->
+    <div class="d-flex justify-content-between align-items-start pb-3 mb-3 border-bottom">
+        <div>
+            <h3 id="modal-titulo" class="modal-title m-0">Nuevo / Editar Proveedor</h3>
+            <div class="text-secondary small">Registra un nuevo o edita un proveedor</div>
+        </div>
+        <button type="button" class="btn-close" aria-label="Cerrar" onclick="window.NuEdProv.cerrar()"></button>
+    </div>
 
-    <h3 id="modal-titulo">Nuevo / Editar Proveedor</h3>
-    <nav>
-        <h3>Registra un nuevo o edita un Proveedor</h3>
-    </nav>
-
-    <p id="mensaje-error-modal" class="mensaje-error" hidden></p>
+    <!-- [TABLER] Alerta dinámica de errores -->
+    <div id="mensaje-error-modal" class="alert alert-danger" role="alert" hidden></div>
 
     <form id="form-proveedor">
-        <div class="campo-grupo">
-            <label for="prov-nombre">Nom del Prov.</label>
-            <input type="text" id="prov-nombre" name="nombre" required maxlength="100" autocomplete="off">
+        <div class="mb-3">
+            <label for="prov-nombre" class="form-label required">Nombre del Proveedor</label>
+            <input type="text" id="prov-nombre" name="nombre" class="form-control" required maxlength="100" autocomplete="off">
         </div>
 
-        <div class="campo-grupo">
-            <label for="prov-telefono">Teléfono.</label>
-            <input type="text" id="prov-telefono" name="telefono" maxlength="20" autocomplete="off">
+        <div class="row g-3 mb-3">
+            <div class="col-12 col-sm-6">
+                <label for="prov-telefono" class="form-label">Teléfono</label>
+                <input type="text" id="prov-telefono" name="telefono" class="form-control" maxlength="20" autocomplete="off">
+            </div>
+
+            <div class="col-12 col-sm-6">
+                <label for="prov-num-cliente" class="form-label">Num. Cliente</label>
+                <input type="text" id="prov-num-cliente" name="num_cliente" class="form-control" maxlength="50" autocomplete="off">
+            </div>
         </div>
 
-        <div class="campo-grupo">
-            <label for="prov-localidad">Localidad.</label>
-            <input type="text" id="prov-localidad" name="localidad" maxlength="100" autocomplete="off">
+        <div class="mb-3">
+            <label for="prov-localidad" class="form-label">Localidad</label>
+            <input type="text" id="prov-localidad" name="localidad" class="form-control" maxlength="100" autocomplete="off">
         </div>
 
-        <div class="campo-grupo">
-            <label for="prov-num-cliente">Num Cliente.</label>
-            <input type="text" id="prov-num-cliente" name="num_cliente" maxlength="50" autocomplete="off">
-        </div>
-
-        <div class="acciones-modal">
-            <button type="button" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
-            <button type="submit" id="btn-guardar" class="btn-confirmar">Confirmar</button>
+        <!-- [TABLER] Botones de acción al pie del modal -->
+        <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+            <button type="button" id="btn-cancelar" class="btn btn-outline-secondary">Cancelar</button>
+            <button type="submit" id="btn-guardar" class="btn btn-primary">Confirmar</button>
         </div>
     </form>
 </div>

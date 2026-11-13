@@ -3,76 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Principal</title>
-    <link rel="stylesheet" href="PagPStyles/PagP.css">
-    <link rel="stylesheet" href="PagPStyles/Perfil.css">
-    <link rel="stylesheet" href="PagPStyles/modalServicios.css">
-    <link rel="stylesheet" href="PagPStyles/modalVentas.css">
+    <title>Página Principal - Sistema de Gestión</title>
+
+    <!-- [TABLER] Estilos principales del framework -->
+    <link rel="stylesheet" href="../assets/css/tabler.min.css">
+
 </head>
-<body>
+<body class="theme-dark">
 
-    <main class="contenedor-principal">
-        <!-- Encabezado y Navegación -->
-        <nav class="barra-navegacion">
-            <h1>Pagina Principal</h1>
+    <!-- [TABLER] Contenedor principal de la página -->
+    <div class="page">
 
-            <table class="TablaNav">
-                <tr>
-                    <td>
-                        <div class="contenedor-menu-perfil">
-                            <button type="button" id="btn-menu" class="btn-menu">&#8942;</button>
-                            <div id="contenedor-perfil"></div>
-                        </div>
-                    </td>
-                    <td>
-                        <button type="button" id="btn-cartera" class="btn-ovalado">Cartera de Clientes</button>
-                    </td>
-                    <td>
-                        <button type="button" id="btn-inventario" class="btn-ovalado">Inventario</button>                        
-                    </td>
-                    <td>
-                        <button type="button" id="btn-proveedores" class="btn-ovalado">Proveedores</button>
-                    </td>
-                    <td>
-                        <button type="button" id="btn-soporte" class="btn-ovalado">Soporte</button>
-                    </td>
-                    <td>
-                        <button type="button" id="btn-agregar" class="btn-agregar">+</button>
-                    </td>
-                </tr>
-            </table>
-        </nav>
+<!-- [TABLER] Barra de navegación superior -->
+        <header class="navbar navbar-expand-md d-print-none mb-3">
+            <div class="container-xl">
+                <!-- [TABLER] Botón desplegable para celular -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-        <!-- Sección de Servicios Pendientes -->
-        <section class="seccion-servicios">
-            <table class="TablaSec">
-                <thead>
-                    <tr>
-                        <td colspan="6">
-                            <h2>Servicios Pendientes.</h2>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><h2>ID</h2></td>
-                        <td><h2>Nombre</h2></td>
-                        <td><h2>Equipo</h2></td>
-                        <td><h2>Fecha</h2></td>
-                        <td colspan="2"><h2>Acciones</h2></td>
-                    </tr>
-                </thead>
-                <!-- Contenedor dinámico de servicios -->
-                <tbody id="lista-servicios"></tbody>
-            </table>
-            <!-- Mensaje de estado -->
-            <div id="aviso"></div>
-        </section>
-    </main>
+                <h1 class="navbar-brand me-auto me-md-4">
+                    <span class="text-primary fw-bold">Sistema de Gestión</span>
+                </h1>
 
-    <dialog id="modal-contenedor" class="modal-overlay">
-        <div class="modal-caja" id="modal-caja"></div>
+                <!-- [TABLER] Contenedor relativo a la derecha para desplegar el perfil hacia la izquierda -->
+                <div class="position-relative order-md-last">
+                    <button type="button" id="btn-menu" class="btn btn-icon btn-ghost-secondary" aria-label="Menú de perfil">&#8942;</button>
+                    <div id="contenedor-perfil"></div>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active fw-bold">
+                            <span class="nav-link">Página Principal</span>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" id="btn-inventario" class="nav-link btn btn-link">Inventario</button>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" id="btn-proveedores" class="nav-link btn btn-link">Proveedores</button>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" id="btn-cartera" class="nav-link btn btn-link">Cartera de Clientes</button>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" id="btn-soporte" class="nav-link btn btn-link">Soporte</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- [TABLER] Cuerpo principal de la vista -->
+        <div class="page-wrapper">
+            <div class="container-xl">
+
+                <!-- [TABLER] Tarjeta contenedora de la tabla -->
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">Servicios Pendientes</h3>
+                        <button type="button" id="btn-agregar" class="btn btn-primary">+ Agregar</button>
+                    </div>
+
+                    <!-- [TABLER] Tabla responsiva integrada a la tarjeta -->
+                    <div class="table-responsive">
+                        <table class="table table-vcenter card-table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Equipo</th>
+                                    <th>Fecha</th>
+                                    <th colspan="2" class="w-1 text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lista-servicios"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="aviso" class="mt-2 text-muted" role="status"></div>
+            </div>
+        </div>
+    </div>
+
+    <dialog id="modal-contenedor">
+        <div id="modal-caja"></div>
     </dialog>
 
-    <!-- Inclusión de scripts -->
+    <!-- [TABLER] Scripts interactivos del framework -->
+    <script src="../assets/js/tabler.min.js"></script>
     <script src="PagPScripts/facturaPDF.js"></script>
     <script src="PagPScripts/modalVentas.js"></script>
     <script src="PagPScripts/modalServicios.js"></script>

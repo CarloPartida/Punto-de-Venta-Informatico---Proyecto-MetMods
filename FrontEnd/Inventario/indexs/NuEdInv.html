@@ -1,50 +1,65 @@
-<div class="NueEd">
-    <h3 id="modal-titulo">Nuevo / Editar Producto</h3>
-    <nav>
-        <h3>Registra un nuevo o edita un Producto</h3>
-    </nav>
+<div>
+    <!-- [TABLER] Encabezado del modal -->
+    <div class="d-flex justify-content-between align-items-start pb-3 mb-3 border-bottom">
+        <div>
+            <h3 id="modal-titulo" class="modal-title m-0">Nuevo / Editar Producto</h3>
+            <div class="text-secondary small">Registra un nuevo o edita un producto</div>
+        </div>
+        <button type="button" class="btn-close" aria-label="Cerrar" onclick="window.NuEdInv.cerrar()"></button>
+    </div>
 
-    <p id="mensaje-error-modal" class="mensaje-error" hidden></p>
+    <!-- [TABLER] Alerta dinámica de errores -->
+    <div id="mensaje-error-modal" class="alert alert-danger" role="alert" hidden></div>
 
     <form id="form-producto" action="/api/productos" method="POST">
-        <div class="campo-grupo">
-            <label for="prod-nombre">Producto.</label>
-            <input type="text" id="prod-nombre" name="nombre" required maxlength="100" autocomplete="off">
+        <div class="mb-3">
+            <label for="prod-nombre" class="form-label required">Producto</label>
+            <input type="text" id="prod-nombre" name="nombre" class="form-control" required maxlength="100" autocomplete="off">
         </div>
 
-        <div class="campo-grupo">
-            <label for="prod-descripcion">Descripción.</label>
-            <input type="text" id="prod-descripcion" name="descripcion" maxlength="500">
+        <div class="mb-3">
+            <label for="prod-descripcion" class="form-label">Descripción</label>
+            <input type="text" id="prod-descripcion" name="descripcion" class="form-control" maxlength="500">
         </div>
 
-        <div class="campo-grupo">
-            <label for="prod-precio">Precio.</label>
-            <input type="number" id="prod-precio" name="precio" step="0.01" min="0" max="99999999.99">
+        <div class="row g-3 mb-3">
+            <div class="col-12 col-sm-6">
+                <label for="prod-precio" class="form-label">Precio</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" id="prod-precio" name="precio" class="form-control" step="0.01" min="0" max="99999999.99">
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6">
+                <label for="prod-disponibilidad" class="form-label">Disponibilidad</label>
+                <input type="number" id="prod-disponibilidad" name="disponibilidad" class="form-control" min="0" max="1000000" step="1">
+            </div>
         </div>
 
-        <div class="campo-grupo">
-            <label for="prod-disponibilidad">Disponibilidad.</label>
-            <input type="number" id="prod-disponibilidad" name="disponibilidad" min="0" max="1000000" step="1">
+        <div class="row g-3 mb-3">
+            <div class="col-12 col-sm-6">
+                <label for="prod-codigo" class="form-label">Código del Prod.</label>
+                <input type="text" id="prod-codigo" name="codigo" class="form-control" maxlength="50">
+            </div>
+
+            <div class="col-12 col-sm-6">
+                <label for="prod-cod-sat" class="form-label">Cod. SAT</label>
+                <input type="text" id="prod-cod-sat" name="cod_sat" class="form-control" maxlength="50">
+            </div>
         </div>
 
-        <div class="campo-grupo">
-            <label for="prod-codigo">Código del Prod.</label>
-            <input type="text" id="prod-codigo" name="codigo" maxlength="50">
+        <div class="mb-3">
+            <label class="form-check form-switch">
+                <input type="checkbox" id="chk-no-inventariable" name="no_inventariable" class="form-check-input">
+                <span class="form-check-label">No inventariable</span>
+            </label>
         </div>
 
-        <div class="campo-grupo">
-            <label for="prod-cod-sat">Cod. Sat.</label>
-            <input type="text" id="prod-cod-sat" name="cod_sat" maxlength="50">
-        </div>
-
-        <div class="campo-checkbox">
-            <input type="checkbox" id="chk-no-inventariable" name="no_inventariable">
-            <label for="chk-no-inventariable">No inventariable.</label>
-        </div>
-
-        <div class="acciones-modal">
-            <button type="button" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
-            <button type="submit" id="btn-guardar" class="btn-confirmar">Confirmar</button>
+        <!-- [TABLER] Botones de acción al pie del modal -->
+        <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+            <button type="button" id="btn-cancelar" class="btn btn-outline-secondary">Cancelar</button>
+            <button type="submit" id="btn-guardar" class="btn btn-primary">Confirmar</button>
         </div>
     </form>
 </div>

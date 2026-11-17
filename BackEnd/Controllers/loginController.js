@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const loginModel = require('../Models/loginModel');
+const sesiones = require('../sesiones');
 
 const MAX_INTENTOS = 3;
 const MINUTOS_BLOQUEO = 1; // Tiempo de bloqueo temporal
@@ -52,8 +53,8 @@ async function iniciarSesion(req, res) {
         // Cuando el login es correcto se resetean los contadores
         await loginModel.resetearIntentos(usuario.ID_Sesion);
 
-        // Se crea la cookie de sesión nativa en la respuesta HTTP
-        res.setHeader('Set-Cookie', 'sesion_activa=true; Path=/; HttpOnly; SameSite=Lax');
+        // Se crea la sesión en el servidor y su cookie en la respuesta HTTP
+        res.setHeader('Set-Cookie', sesiones.crear({ idSesion: usuario.ID_Sesion, usuario: usuario.nom_user }));
 
         res.redirect('/Pag Principal/PagP.html'); 
     } catch (error) {

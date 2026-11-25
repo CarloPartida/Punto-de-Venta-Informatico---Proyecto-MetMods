@@ -1,22 +1,8 @@
 const express = require("express");
 const path = require("path");
+const session = require("express-session");
 require('dotenv').config();
-const sesiones = require('./sesiones');
 const { auditar } = require('./Middleware/auditoria');
-
-// Middleware de autenticación por Cookie Nativa
-function verificarAutenticacion(req, res, next) {
-    // Solo se permite el acceso si la cookie corresponde a una sesión creada en el login
-    const sesion = sesiones.obtener(req);
-    if (sesion) {
-        // El nombre de usuario queda disponible para el registro de auditoría
-        req.usuario = sesion.usuario;
-        return next();
-    }
-    
-    // Si no existe, devuelve 401 Unauthorized
-    return res.status(401).json({ error: "Acceso denegado. Debe iniciar sesión." });
-}
 
 // Rutas importadas por módulo
 const loginRoutes = require('./Routes/loginRouter');
@@ -31,9 +17,35 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Configuración de express-session (reemplaza a sesiones.js)
+app.use(session({
+    name: 'sesion.sid',
+    secret: process.env.SESSION_SECRET || 'clave_secreta_punto_venta',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        path: '/',
+        sameSite: 'lax',
+        secure: false // Cambiar a true solo si usas HTTPS en producción
+    }
+}));
+
+// Middleware de autenticación por sesión
+function verificarAutenticacion(req, res, next) {
+    if (req.session && req.session.usuario) {
+        // Asigna el nombre de usuario a req.usuario para que funcione el middleware de auditoría
+        req.usuario = req.session.usuario.usuario;
+        return next();
+    }
+    
+    // Si no existe sesión activa, devuelve 401 Unauthorized
+    return res.status(401).json({ mensaje: "Acceso denegado. Debe iniciar sesión." });
+}
+
 app.use(express.static(path.join(__dirname, '../FrontEnd')));
 
-// Uso de enrutadores públicos
+// Uso de enrutadores públicos (login, perfil, logout)
 app.use(loginRoutes);
 
 // Enrutadores protegidos con el middleware (cada modificación exitosa queda en la auditoría)
@@ -48,13 +60,6 @@ app.use('/api/auditoria', verificarAutenticacion, auditoriaRouter);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../FrontEnd/Login/Login.html'));
-});
-
-// Borra cookie al cerrar sesion
-app.post('/api/logout', (req, res) => {
-    sesiones.destruir(req);
-    res.setHeader('Set-Cookie', 'sesion_activa=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT');
-    res.json({ ok: true, mensaje: "Sesión cerrada correctamente" });
 });
 
 const PORT = process.env.PORT || 3000;

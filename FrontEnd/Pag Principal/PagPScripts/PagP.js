@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const API = '/api/servicios';
     const listaServicios = document.getElementById('lista-servicios');
     const aviso = document.getElementById('aviso');
+    
 
     // Muestra notificaciones contextuales en la interfaz principal
     const avisar = txt => { if (aviso) aviso.textContent = txt; };

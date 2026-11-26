@@ -12,10 +12,11 @@ const invRouter = require('./Routes/invRouter');
 const provRouter = require('./Routes/provRouter');
 const soporteRouter = require('./Routes/soporteRouter');
 const auditoriaRouter = require('./Routes/auditoriaRouter');
+const cambiarDatosRoutes = require('./Routes/cambiarDatosRouter');
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Configuración de express-session (reemplaza a sesiones.js)
@@ -53,7 +54,9 @@ app.use('/api/servicios', verificarAutenticacion, auditar('servicio', cuerpo => 
 app.use('/api/clientes', verificarAutenticacion, auditar('cliente', cuerpo => cuerpo?.nombre), carcRouter);
 app.use('/api/productos', verificarAutenticacion, auditar('producto', cuerpo => cuerpo?.nombre), invRouter);
 app.use('/api/proveedores', verificarAutenticacion, auditar('proveedor', cuerpo => cuerpo?.nombre), provRouter);
+app.use('/api/soporte/cambiar-datos', verificarAutenticacion, auditar('perfil', cuerpo => cuerpo?.username), cambiarDatosRoutes);
 app.use('/api/soporte', verificarAutenticacion, auditar('técnico', cuerpo => cuerpo?.nombre), soporteRouter);
+app.use('/Updates', express.static(path.join(__dirname, 'Updates')));
 
 // Historial de modificaciones (solo lectura)
 app.use('/api/auditoria', verificarAutenticacion, auditoriaRouter);

@@ -77,23 +77,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Abrir modal con el botón del menú de perfil
+    // Abrir modal con el botón del menú de perfil (usamos 'true' para capturar el clic antes del stopPropagation de Perfil.js)
     document.addEventListener('click', (e) => {
         const btn = e.target.closest('#btn-auditoria, #contenedor-perfil button');
         if (btn && (btn.id === 'btn-auditoria' || btn.textContent.trim() === 'Registro de Auditoría')) {
+            // Ocultar el menú de perfil si está abierto
+            const panelPerfil = document.getElementById('panel-perfil');
+            if (panelPerfil) panelPerfil.style.display = 'none';
+
             dialog.showModal();
             lista.focus();
             cargar(true);
         }
-    });
+    }, true);
 
     // Cargar la siguiente página del historial
     btnMas.addEventListener('click', () => cargar(false));
 
-    // Cerrar modal con el botón de cierre
+    // Cerrar modal con el botón de cierre o haciendo clic fuera
     caja.addEventListener('click', (e) => {
         if (e.target.closest('#btn-cerrar-auditoria')) {
             dialog.close();
         }
+    });
+
+    dialog.addEventListener('click', (e) => {
+        if (e.target === dialog) dialog.close();
     });
 });

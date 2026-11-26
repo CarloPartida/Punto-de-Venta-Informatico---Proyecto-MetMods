@@ -5,30 +5,15 @@
         <button type="button" id="btn-cerrar-auditoria" class="btn-close" aria-label="Cerrar"></button>
     </div>
 
-    <!-- [TABLER] Caja contenedora con scroll para la lista de modificaciones -->
-    <div id="lista-auditoria" class="border rounded-3 p-3 bg-body-tertiary d-flex flex-column gap-3" style="max-height: 24rem; overflow-y: auto;">
-        <!-- Bloque de muestra 1 -->
-        <div>
-            <div class="small fw-semibold text-secondary mb-1">Usuario Modificó:</div>
-            <div class="border rounded-2 px-3 py-2 bg-body text-center">
-                Modificación (Fecha y Hora)
-            </div>
-        </div>
-
-        <!-- Bloque de muestra 2 -->
-        <div>
-            <div class="small fw-semibold text-secondary mb-1">Usuario Modificó:</div>
-            <div class="border rounded-2 px-3 py-2 bg-body text-center">
-                Modificación (Fecha y Hora)
-            </div>
-        </div>
-
-        <!-- Bloque de muestra 3 -->
-        <div>
-            <div class="small fw-semibold text-secondary mb-1">Usuario Modificó:</div>
-            <div class="border rounded-2 px-3 py-2 bg-body text-center">
-                Modificación (Fecha y Hora)
-            </div>
-        </div>
+    <!-- [TABLER] Caja contenedora con scroll para la lista de modificaciones (solo lectura).
+         tabindex="0" permite enfocarla con Tab y recorrerla con las flechas, Re Pág, Av Pág, Inicio y Fin (RQNF 31) -->
+    <div id="lista-auditoria" role="list" tabindex="0" aria-label="Historial de modificaciones"
+         class="border rounded-3 p-3 bg-body-tertiary d-flex flex-column gap-3" style="max-height: 24rem; overflow-y: auto;">
     </div>
+
+    <!-- Mensajes de carga, lista vacía o error -->
+    <div id="estado-auditoria" role="status" aria-live="polite" class="small text-secondary text-center mt-2"></div>
+
+    <!-- Carga la siguiente página del historial -->
+    <button type="button" id="btn-mas-auditoria" class="btn btn-outline-primary btn-sm w-100 mt-2" hidden>Cargar más</button>
 </div>

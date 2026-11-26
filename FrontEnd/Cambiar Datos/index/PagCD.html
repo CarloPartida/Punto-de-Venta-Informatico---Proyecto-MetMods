@@ -10,10 +10,10 @@
     <form id="form-cambiar-datos" class="d-flex flex-column gap-3">
         <!-- Foto de perfil -->
         <div class="d-flex align-items-center gap-3 p-3 border rounded-3 bg-body-tertiary">
-            <span id="preview-foto-perfil" class="avatar avatar-lg rounded-circle border"></span>
+            <span id="preview-foto-perfil" class="avatar avatar-lg rounded-circle border" style="background-size: cover; background-position: center;"></span>
             <div class="flex-fill">
                 <div class="small text-secondary mb-1">Imagen de usuario</div>
-                <input type="file" id="input-foto-perfil" accept="image/*" hidden>
+                <input type="file" id="input-foto-perfil" name="foto" accept="image/png, image/jpeg, image/webp" hidden>
                 <button type="button" id="btn-cambiar-foto" class="btn btn-outline-primary btn-sm">
                     Cambiar foto de perfil
                 </button>
@@ -23,17 +23,17 @@
         <!-- Datos editables -->
         <div>
             <label for="input-username" class="form-label">Username</label>
-            <input type="text" id="input-username" class="form-control" placeholder="Nombre de usuario">
+            <input type="text" id="input-username" name="username" class="form-control" placeholder="Nombre de usuario">
         </div>
 
         <div>
             <label for="input-edad" class="form-label">Edad</label>
-            <input type="number" id="input-edad" class="form-control" min="1" max="120" placeholder="Edad">
+            <input type="number" id="input-edad" name="edad" class="form-control" min="1" max="120" placeholder="Edad">
         </div>
 
         <div>
             <label for="input-nueva-password" class="form-label">Contraseña (Nueva)</label>
-            <input type="password" id="input-nueva-password" class="form-control" placeholder="Dejar en blanco si no deseas cambiarla">
+            <input type="password" id="input-nueva-password" name="contNueva" class="form-control" placeholder="Dejar en blanco si no deseas cambiarla">
         </div>
 
         <hr class="my-1">
@@ -45,9 +45,12 @@
             </p>
             <div>
                 <label for="input-password-actual" class="form-label">Contraseña</label>
-                <input type="password" id="input-password-actual" class="form-control" placeholder="Contraseña actual" required>
+                <input type="password" id="input-password-actual" name="contActual" class="form-control" placeholder="Contraseña actual" required>
             </div>
         </div>
+
+        <!-- Mensaje de estado / error -->
+        <div id="estado-cambiar-datos" class="small text-center" role="status"></div>
 
         <!-- Botones de acción -->
         <div class="d-flex justify-content-end gap-2 pt-2">

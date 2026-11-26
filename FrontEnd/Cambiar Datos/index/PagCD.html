@@ -1,0 +1,62 @@
+<div id="panel-cambiar-datos">
+    <!-- Encabezado -->
+    <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom">
+        <h3 class="modal-title m-0">
+            Cambiar datos <span id="titulo-usuario-editar" class="text-primary"></span>
+        </h3>
+        <button type="button" id="btn-cerrar-cambiar-datos" class="btn-close" aria-label="Cerrar"></button>
+    </div>
+
+    <form id="form-cambiar-datos" class="d-flex flex-column gap-3">
+        <!-- Foto de perfil -->
+        <div class="d-flex align-items-center gap-3 p-3 border rounded-3 bg-body-tertiary">
+            <span id="preview-foto-perfil" class="avatar avatar-lg rounded-circle border"></span>
+            <div class="flex-fill">
+                <div class="small text-secondary mb-1">Imagen de usuario</div>
+                <input type="file" id="input-foto-perfil" accept="image/*" hidden>
+                <button type="button" id="btn-cambiar-foto" class="btn btn-outline-primary btn-sm">
+                    Cambiar foto de perfil
+                </button>
+            </div>
+        </div>
+
+        <!-- Datos editables -->
+        <div>
+            <label for="input-username" class="form-label">Username</label>
+            <input type="text" id="input-username" class="form-control" placeholder="Nombre de usuario">
+        </div>
+
+        <div>
+            <label for="input-edad" class="form-label">Edad</label>
+            <input type="number" id="input-edad" class="form-control" min="1" max="120" placeholder="Edad">
+        </div>
+
+        <div>
+            <label for="input-nueva-password" class="form-label">Contraseña (Nueva)</label>
+            <input type="password" id="input-nueva-password" class="form-control" placeholder="Dejar en blanco si no deseas cambiarla">
+        </div>
+
+        <hr class="my-1">
+
+        <!-- Confirmación de identidad -->
+        <div class="p-3 border rounded-3 bg-body-tertiary">
+            <p class="small text-secondary mb-2">
+                Ingresa tu contraseña actual para aplicar los cambios
+            </p>
+            <div>
+                <label for="input-password-actual" class="form-label">Contraseña</label>
+                <input type="password" id="input-password-actual" class="form-control" placeholder="Contraseña actual" required>
+            </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="d-flex justify-content-end gap-2 pt-2">
+            <button type="button" id="btn-deshacer-datos" class="btn btn-outline-secondary">
+                Deshacer
+            </button>
+            <button type="submit" id="btn-aplicar-datos" class="btn btn-primary">
+                Aplicar Cambios
+            </button>
+        </div>
+    </form>
+</div>
